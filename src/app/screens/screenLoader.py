@@ -1,5 +1,3 @@
-import sys
-sys.path.append('src/')
 from app.screens.screen import Screen
 
 import os
@@ -26,5 +24,5 @@ class ScreenLoader:
             self.screensList.append(screenInstance)
     
 
-    def buildScreen(self, screenNumber):
-        self.screensList[screenNumber].build()
+    def buildScreen(self, screenNumber, rootWidth, rootHeight):
+        self.screensList[screenNumber].build(rootWidth, rootHeight)

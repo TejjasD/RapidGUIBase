@@ -1,17 +1,18 @@
-import sys
-sys.path.append('src/')
 from app.screens.screenLoader import ScreenLoader
 from eventHandler.eventHandler import eventHandler
 from user.passwordManager.passwordManager import passwordManager 
 
 import tkinter as tk
+import pandas as pd
 
 class Root():
     
     def __init__(self):
+        self.widowConfigs = pd.read_csv('config\\ui\\root\\window\\window.csv')
+        self.width = self.widowConfigs['Value'][0]
+        self.height = self.widowConfigs['Value'][1]
+
         self.root = tk.Tk()
-        self.height = 500
-        self.width = 1200
         self.numScreens = 1
         self.eventHandler = eventHandler(self)
         self.screenLoader = ScreenLoader(self.eventHandler)
@@ -25,11 +26,11 @@ class Root():
         self.root.mainloop()
     
     def setConfigs(self):
-        self.root.configure(background = '#a8984d')
         self.root.geometry(str(self.width) + "x" + str(self.height))
     
     def build(self):
-        self.screenLoader.buildScreen(self.screenNumber)
+        self.root.configure(background = self.screenLoader.screensList[self.screenNumber].bgColor)
+        self.screenLoader.buildScreen(self.screenNumber, self.width, self.height)
 
     def changeScreen(self, newScreenNumber):
         self.screenNumber = newScreenNumber

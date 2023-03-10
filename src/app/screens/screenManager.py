@@ -4,7 +4,7 @@ from app.screens.screen import Screen
 
 #########################################################################################
 
-class ScreenLoader:
+class ScreenManager:
 
     def __init__(self, eventHandler, uiConfigs, layoutConfigs):
         self.screensList = []

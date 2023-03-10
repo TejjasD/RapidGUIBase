@@ -1,7 +1,7 @@
 # Built by Tejas Deolasee
 
 from core.configManager.configManager import configManager
-from app.screens.screenLoader import ScreenLoader
+from app.screens.screenManager import ScreenManager
 from eventHandler.eventHandler import eventHandler
 from user.passwordManager.passwordManager import passwordManager 
 
@@ -23,7 +23,7 @@ class Root():
         self.root = tk.Tk()
         self.numScreens = 1
         self.eventHandler = eventHandler(self)
-        self.screenLoader = ScreenLoader(self.eventHandler, self.uiConfigs, self.layoutConfigs)
+        self.screenLoader = ScreenManager(self.eventHandler, self.uiConfigs, self.layoutConfigs)
         self.screenNumber = 0
         self.passwordManager = passwordManager()
 

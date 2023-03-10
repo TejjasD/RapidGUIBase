@@ -1,7 +1,13 @@
+# Built by Tejas Deolasee
+
+#########################################################################################
+
 class eventHandler:
 
     def __init__(self, root):
         self.root = root
+
+#########################################################################################
         
     def btLogin(self):
         print("Login Pressed")
@@ -11,5 +17,9 @@ class eventHandler:
             self.root.screenLoader.screensList[self.root.screenNumber].destroy()
             self.root.changeScreen(1)
 
+#########################################################################################
+
     def btSignUp(self):
         print("Signed Up")
+
+#########################################################################################

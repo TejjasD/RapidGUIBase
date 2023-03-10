@@ -1,6 +1,10 @@
+# Built by Tejas Deolasee
+
 from tkInter.tkInterElements import *
 import pandas as pd
 import random
+
+#########################################################################################
 
 class Screen():
 
@@ -27,6 +31,8 @@ class Screen():
 
         self.loadConfigs()
     
+#########################################################################################
+
     def loadConfigs(self):
         fileName = Screen.baseLayoutPath + '\screen' + str(self.screenId)+ 'Elements.xlsx'
 
@@ -40,6 +46,8 @@ class Screen():
         self.numRows = screenCofigValues[1]
         self.numColumns = screenCofigValues[2]
         self.bgColor = screenCofigValues[3]
+
+#########################################################################################
 
     def loadScreen(self, eventHandler):
     
@@ -58,7 +66,8 @@ class Screen():
             self.textBoxesList.append(textBoxInstance)
             self.textBoxDict[textBoxId] = textBoxInstance
 
-    
+#########################################################################################
+  
     def build(self, rootWidth, rootHeight):
         if self.mode == 'grid':
             self.buildDummy(rootWidth, rootHeight)
@@ -85,6 +94,7 @@ class Screen():
             for textBox in self.textBoxesList:
                 textBox.textBox.place(x=textBox.pos[0], y=textBox.pos[1], width=textBox.width, height=textBox.height)
 
+#########################################################################################
 
     def buildDummy(self, rootWidth, rootHeight):
         labelWidth = int(rootWidth/self.numColumns)
@@ -95,6 +105,8 @@ class Screen():
                 label = tk.Frame(background=self.bgColor, width=labelWidth, height=labelHeight)
                 label.grid(row=r, column=c)
 
+#########################################################################################
+
     def destroy(self):
         for button in self.buttonsList:
             button.button.destroy()
@@ -102,6 +114,8 @@ class Screen():
             label.label.destroy()
         for textBox in self.textBoxesList:
             textBox.textBox.destroy()
+
+#########################################################################################
     
     
     

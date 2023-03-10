@@ -1,20 +1,16 @@
 # Built by Tejas Deolasee
 
 from tkInter.tkInterElements import *
-import pandas as pd
-import random
 
 #########################################################################################
 
 class Screen():
 
-    buttonUIConfigs = pd.read_csv('config\\ui\\tkInterElements\\buttonUI.csv')
-    labelUIConfigs = pd.read_csv('config\\ui\\tkInterElements\\labelUI.csv')
-    textBoxUIConfigs = pd.read_csv('config\\ui\\tkInterElements\\textBoxUI.csv')
-    baseLayoutPath = 'config\layout'
 
-    def __init__(self, screenId):
+    def __init__(self, screenId, layoutConfigs, uiConfigs):
         self.screenId = screenId
+        self.layoutConfigs = layoutConfigs
+        self.uiConfigs = uiConfigs
         self.buttonsList = []
         self.labelsList = []
         self.textBoxesList = []
@@ -34,18 +30,16 @@ class Screen():
 #########################################################################################
 
     def loadConfigs(self):
-        fileName = Screen.baseLayoutPath + '\screen' + str(self.screenId)+ 'Elements.xlsx'
 
-        self.buttonInstanceData = pd.read_excel(fileName, sheet_name = "Buttons")
-        self.labelInstanceData = pd.read_excel(fileName, sheet_name="Labels")
-        self.textBoxInstanceData = pd.read_excel(fileName, sheet_name="TextBoxes")
-        screenConfigData = pd.read_excel(fileName, sheet_name='Screen')
+        self.buttonInstanceData = self.layoutConfigs['button']
+        self.labelInstanceData = self.layoutConfigs['label']
+        self.textBoxInstanceData = self.layoutConfigs['textBox']
 
-        screenCofigValues = screenConfigData['Value']
-        self.mode = screenCofigValues[0]
-        self.numRows = screenCofigValues[1]
-        self.numColumns = screenCofigValues[2]
-        self.bgColor = screenCofigValues[3]
+        screenConfigValues = self.layoutConfigs['screen']['Value']
+        self.mode = screenConfigValues[0]
+        self.numRows = screenConfigValues[1]
+        self.numColumns = screenConfigValues[2]
+        self.bgColor = screenConfigValues[3]
 
 #########################################################################################
 
@@ -53,16 +47,16 @@ class Screen():
     
         for b in range(self.buttonInstanceData.shape[0]):
             buttonId = self.buttonInstanceData.iloc[b][0]
-            buttonInstance = Button(Screen.buttonUIConfigs, list(self.buttonInstanceData.iloc[b]), getattr(eventHandler, buttonId))
+            buttonInstance = Button(self.uiConfigs['button'], list(self.buttonInstanceData.iloc[b]), getattr(eventHandler, buttonId))
             self.buttonsList.append(buttonInstance)
         
         for l in range(self.labelInstanceData.shape[0]):
-            labelInstance = Label(Screen.labelUIConfigs, list(self.labelInstanceData.iloc[l]))
+            labelInstance = Label(self.uiConfigs['label'], list(self.labelInstanceData.iloc[l]))
             self.labelsList.append(labelInstance)
         
         for t in range(self.textBoxInstanceData.shape[0]):
             textBoxId = self.textBoxInstanceData.iloc[t][0]
-            textBoxInstance = TextBox(Screen.textBoxUIConfigs, list(self.textBoxInstanceData.iloc[t]))
+            textBoxInstance = TextBox(self.uiConfigs['textBox'], list(self.textBoxInstanceData.iloc[t]))
             self.textBoxesList.append(textBoxInstance)
             self.textBoxDict[textBoxId] = textBoxInstance
 
@@ -73,15 +67,16 @@ class Screen():
             self.buildDummy(rootWidth, rootHeight)
 
             for button in self.buttonsList:
-                button.button.grid(row=button.rowStart, rowspan=button.rowSpan, column=button.columnStart, columnspan=button.columnSpan)
+                button.button.grid()
+                button.button.grid(row=button.rowStart, rowspan=button.rowSpan, column=button.columnStart, columnspan=button.columnSpan, sticky=button.sticky)
                 button.button.lift()
 
             for label in self.labelsList:
-                label.label.grid(row=label.rowStart, rowspan=label.rowSpan, column=label.columnStart, columnspan=label.columnSpan)
+                label.label.grid(row=label.rowStart, rowspan=label.rowSpan, column=label.columnStart, columnspan=label.columnSpan, sticky=label.sticky)
                 label.label.lift()
 
             for textBox in self.textBoxesList:
-                textBox.textBox.grid(row=textBox.rowStart, rowspan=textBox.rowSpan, column=textBox.columnStart, columnspan=textBox.columnSpan)
+                textBox.textBox.grid(row=textBox.rowStart, rowspan=textBox.rowSpan, column=textBox.columnStart, columnspan=textBox.columnSpan, sticky=textBox.sticky)
                 textBox.textBox.lift()
 
         else:
@@ -101,7 +96,6 @@ class Screen():
         labelHeight = int(rootHeight/self.numRows)
         for c in range(self.numColumns):
             for r in range(self.numRows):
-                color = random.randrange(111111, 999999)
                 label = tk.Frame(background=self.bgColor, width=labelWidth, height=labelHeight)
                 label.grid(row=r, column=c)
 

@@ -1,3 +1,4 @@
 type,borderWidth,backgroundColor,foregroundColor,activeBackgroundColor,activeForegroundColor,font,fontSize,width,height,higlightColor,padX,padY,relief
-0,3,#99ccff,#333300,#3366ff,#ffffff,Andalus,10,80,20,#99ff99,5,5,groove
-1,5,#99ccff,#333300,#3366ff,#ffffff,Andalus,15,120,30,#99ff99,10,10,groove
+0,3,#99ccff,#333300,#3366ff,#ffffff,Andalus,10,10,1,#99ff99,5,5,groove
+1,5,#99ccff,#333300,#3366ff,#ffffff,Andalus,15,20,2,#99ff99,10,10,groove
+2,3,#3366ff,#ffffff,#99ccff,#333300,Andalus,10,10,1,#99ff99,5,5,groove

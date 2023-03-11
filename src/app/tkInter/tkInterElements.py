@@ -14,8 +14,6 @@ class Button:
         self.command = command
         self.id = 0
         self.pos = (0, 0)
-        self.width = 0
-        self.height = 0
         self.row = []
         self.button = None
 
@@ -55,8 +53,9 @@ class Button:
                                 relief=self.row[13], 
                                 text=self.buttonInstanceData[8], 
                                 command=self.command)
-        self.width = self.row[8]
-        self.height = self.row[9]
+        
+        self.button.config(width=self.row[8])
+        self.button.config(height=self.row[9])
 
 
 #########################################################################################
@@ -112,8 +111,6 @@ class TextBox:
         self.textBoxInstanceData = textBoxInstancedata
         self.id = 0
         self.pos = (0, 0)
-        self.width = 0
-        self.height = 0
         self.row = []
         self.textBox = None
 
@@ -128,15 +125,14 @@ class TextBox:
     def impltextBoxInstanceData(self):
         self.id = self.textBoxInstanceData[0]
         self.pos = (self.textBoxInstanceData[1], self.textBoxInstanceData[2])
-        self.height = self.textBoxInstanceData[8]
-        self.width = self.textBoxInstanceData[9]
-        self.row = list(self.textBoxUIConfigs.iloc[int(self.textBoxInstanceData[10])])
+        self.row = list(self.textBoxUIConfigs.iloc[int(self.textBoxInstanceData[8])])
 
         self.rowStart = int(self.textBoxInstanceData[3])-1
         self.rowSpan = int(self.textBoxInstanceData[4])-self.rowStart
         self.columnStart = int(self.textBoxInstanceData[5])-1
         self.columnSpan = int(self.textBoxInstanceData[6])-self.columnStart
         self.sticky = self.textBoxInstanceData[7]
+
         if not isinstance(self.sticky, str):
             if math.isnan(self.sticky):
                 self.sticky = ""
@@ -148,7 +144,9 @@ class TextBox:
                                 fg=self.row[3],  
                                 font=(self.row[4], self.row[5]), 
                                 highlightcolor=self.row[6],  
-                                relief=self.row[7])
+                                relief=self.row[7],
+                                width=self.row[8])
+        # self.textBox.config(height)
 
 #########################################################################################
 

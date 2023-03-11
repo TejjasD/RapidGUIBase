@@ -89,13 +89,13 @@ class Screen():
 
         else:
             for button in self.buttonsList:
-                button.button.place(x=button.pos[0], y=button.pos[1], width=button.width, height=button.height)
+                button.button.place(x=button.pos[0], y=button.pos[1])
 
             for label in self.labelsList:
                 label.label.place(x=label.pos[0], y=label.pos[1])
             
             for textBox in self.textBoxesList:
-                textBox.textBox.place(x=textBox.pos[0], y=textBox.pos[1], width=textBox.width, height=textBox.height)
+                textBox.textBox.place(x=textBox.pos[0], y=textBox.pos[1])
 
 #########################################################################################
 
@@ -105,7 +105,7 @@ class Screen():
         for c in range(self.numColumns):
             for r in range(self.numRows):
                 # color  = random.randint(100000, 999999)
-                # frame = tk.Frame(background = "#" + str(color), width=labelWidth, height=labelHeight)
+                # frame = DummyFrame("#"+str(color), labelWidth, labelHeight, r, c)
                 frame = DummyFrame(self.bgColor, labelWidth, labelHeight, r, c)
                 self.dummyFrames.append(frame)
 

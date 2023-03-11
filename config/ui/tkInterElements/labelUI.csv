@@ -1,4 +1,5 @@
-type,foregroundColor,backgroundColor,font,fontSize,achnor
-0,#99004d,#a8984d,Andalus,15,e
-1,#99004d,#a8984d,Andalus,10,e
-2,#99004d,#a8984d,Andalus,40,e
+type,foregroundColor,backgroundColor,font,fontSize
+0,#99004d,#a8984d,Andalus,15
+1,#99004d,#a8984d,Andalus,10
+2,#99004d,#a8984d,Andalus,40
+3,#000000,#a8984d,Andalus,8

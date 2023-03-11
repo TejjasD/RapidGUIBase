@@ -1,6 +1,8 @@
 # Built by Tejas Deolasee
 
-from tkInter.tkInterElements import *
+from app.tkInter.tkInterElements import *
+
+import random
 
 #########################################################################################
 
@@ -15,6 +17,7 @@ class Screen():
         self.labelsList = []
         self.textBoxesList = []
         self.textBoxDict = {}
+        self.dummyFrames = []
         
         self.buttonInstanceData = None
         self.labelInstanceData = None
@@ -43,7 +46,10 @@ class Screen():
 
 #########################################################################################
 
-    def loadScreen(self, eventHandler):
+    def loadScreen(self, eventHandler, rootWidth, rootHeight):
+
+        if self.mode == "grid":
+            self.loadDummy(rootWidth, rootHeight)
     
         for b in range(self.buttonInstanceData.shape[0]):
             buttonId = self.buttonInstanceData.iloc[b][0]
@@ -62,9 +68,11 @@ class Screen():
 
 #########################################################################################
   
-    def build(self, rootWidth, rootHeight):
+    def build(self):
         if self.mode == 'grid':
-            self.buildDummy(rootWidth, rootHeight)
+
+            for frame in self.dummyFrames:
+                frame.frame.grid(row=frame.row, column=frame.column)
 
             for button in self.buttonsList:
                 button.button.grid()
@@ -91,13 +99,15 @@ class Screen():
 
 #########################################################################################
 
-    def buildDummy(self, rootWidth, rootHeight):
+    def loadDummy(self, rootWidth, rootHeight):
         labelWidth = int(rootWidth/self.numColumns)
         labelHeight = int(rootHeight/self.numRows)
         for c in range(self.numColumns):
             for r in range(self.numRows):
-                label = tk.Frame(background=self.bgColor, width=labelWidth, height=labelHeight)
-                label.grid(row=r, column=c)
+                # color  = random.randint(100000, 999999)
+                # frame = tk.Frame(background = "#" + str(color), width=labelWidth, height=labelHeight)
+                frame = DummyFrame(self.bgColor, labelWidth, labelHeight, r, c)
+                self.dummyFrames.append(frame)
 
 #########################################################################################
 
@@ -108,6 +118,8 @@ class Screen():
             label.label.destroy()
         for textBox in self.textBoxesList:
             textBox.textBox.destroy()
+        for frame in self.dummyFrames:
+            frame.frame.destroy()
 
 #########################################################################################
     

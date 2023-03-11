@@ -1,7 +1,7 @@
 # Built by Tejas Deolasee
 
 import sys
-sys.path.append('src')
+sys.path.append('src/')
 from app.root.root import Root
 
 #########################################################################################

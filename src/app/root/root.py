@@ -23,7 +23,7 @@ class Root():
         self.root = tk.Tk()
         self.numScreens = 1
         self.eventHandler = eventHandler(self)
-        self.screenLoader = ScreenManager(self.eventHandler, self.uiConfigs, self.layoutConfigs)
+        self.screenLoader = ScreenManager(self.eventHandler, self.uiConfigs, self.layoutConfigs,  self.width, self.height)
         self.screenNumber = 0
         self.passwordManager = passwordManager()
 
@@ -44,7 +44,7 @@ class Root():
     
     def build(self):
         self.root.configure(background = self.screenLoader.screensList[self.screenNumber].bgColor)
-        self.screenLoader.buildScreen(self.screenNumber, self.width, self.height)
+        self.screenLoader.buildScreen(self.screenNumber)
 
 #########################################################################################
 

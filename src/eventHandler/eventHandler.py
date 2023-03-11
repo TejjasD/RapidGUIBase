@@ -23,3 +23,9 @@ class eventHandler:
         print("Signed Up")
 
 #########################################################################################
+
+    def btAddMonth(self):
+        self.root.screenLoader.screensList[self.root.screenNumber].destroy()
+        self.root.changeScreen(2)
+
+#########################################################################################

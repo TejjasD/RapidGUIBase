@@ -98,8 +98,7 @@ class Label:
     def createLabel(self):
         self.label = tk.Label(fg=self.row[1], 
                               bg = self.row[2],
-                              font=(self.row[3], self.row[4]),
-                              anchor=self.row[5], 
+                              font=(self.row[3], self.row[4]), 
                               text=self.labelInstanceData[8])
 
 
@@ -131,7 +130,7 @@ class TextBox:
         self.pos = (self.textBoxInstanceData[1], self.textBoxInstanceData[2])
         self.height = self.textBoxInstanceData[8]
         self.width = self.textBoxInstanceData[9]
-        self.row = list(self.textBoxUIConfigs.iloc[self.textBoxInstanceData[10]])
+        self.row = list(self.textBoxUIConfigs.iloc[int(self.textBoxInstanceData[10])])
 
         self.rowStart = int(self.textBoxInstanceData[3])-1
         self.rowSpan = int(self.textBoxInstanceData[4])-self.rowStart
@@ -152,6 +151,16 @@ class TextBox:
                                 relief=self.row[7])
 
 #########################################################################################
+
+class DummyFrame:
+    def __init__(self, bgColor, width, height, row, column):
+        self.frame = tk.Frame(background=bgColor, width=width, height=height)
+        self.row = row
+        self.column = column
+
+#########################################################################################
+
+    
 
        
 

@@ -1,5 +1,7 @@
 # Built by Tejas Deolasee
 
+from app.tkInter.tkInterElements import *
+
 #########################################################################################
 
 class eventHandler:
@@ -9,23 +11,23 @@ class eventHandler:
 
 #########################################################################################
         
-    def btLogin(self):
-        print("Login Pressed")
-        loginId = self.root.screenLoader.screensList[self.root.screenNumber].textBoxDict['tbUserId'].textBox.get()
-        password = self.root.screenLoader.screensList[self.root.screenNumber].textBoxDict['tbPassword'].textBox.get()
+    def btLogin0(self):
+        screen = self.root.screenManager.screensList[self.root.screenNumber]
+        loginId = screen.textBoxDict['tbUserId0'].textBox.get()
+        password = screen.textBoxDict['tbPassword0'].textBox.get()
         if self.root.passwordManager.authenticateUser(loginId, password):
-            self.root.screenLoader.screensList[self.root.screenNumber].destroy()
+            screen.destroy()
             self.root.changeScreen(1)
 
 #########################################################################################
 
-    def btSignUp(self):
+    def btSignUp0(self):
         print("Signed Up")
 
 #########################################################################################
 
-    def btAddMonth(self):
-        self.root.screenLoader.screensList[self.root.screenNumber].destroy()
+    def btAddMonth1(self):
+        self.root.screenManager.screensList[self.root.screenNumber].destroy()
         self.root.changeScreen(2)
 
 #########################################################################################
@@ -43,4 +45,10 @@ class eventHandler:
     def btLiabilities2(self):
         pass
 
+#########################################################################################
+
+    def btAddField2(self):
+       pass
+        
+    
 #########################################################################################

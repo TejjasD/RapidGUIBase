@@ -1,6 +1,8 @@
 # Built by Tejas Deolasee
 
+from app.Structuralizer.structuralizer import Structuralizer 
 from app.tkInter.tkInterElements import *
+from app.Structuralizer.structureLoader import StructureLoader
 
 import random
 
@@ -9,10 +11,14 @@ import random
 class Screen():
 
 
-    def __init__(self, screenId, layoutConfigs, uiConfigs):
+    def __init__(self, screenId, layoutConfigs, uiConfigs, rootWidth, rootHeight):
         self.screenId = screenId
         self.layoutConfigs = layoutConfigs
         self.uiConfigs = uiConfigs
+        self.rootWidth = rootWidth
+        self.rootHeight = rootHeight
+        self.structureLoader = StructureLoader(self.layoutConfigs['structure'], self.rootWidth, self.rootHeight)
+        self.structureDictionary = self.structureLoader.structuresDictionary
         self.buttonsList = []
         self.labelsList = []
         self.textBoxesList = []
@@ -46,10 +52,10 @@ class Screen():
 
 #########################################################################################
 
-    def loadScreen(self, eventHandler, rootWidth, rootHeight):
+    def loadScreen(self, eventHandler):
 
         if self.mode == "grid":
-            self.loadDummy(rootWidth, rootHeight)
+            self.loadDummy()
     
         for b in range(self.buttonInstanceData.shape[0]):
             buttonId = self.buttonInstanceData.iloc[b][0]
@@ -89,19 +95,19 @@ class Screen():
 
         else:
             for button in self.buttonsList:
-                button.button.place(x=button.pos[0], y=button.pos[1])
+                button.button.place(x=button.pos[0], y=button.pos[1], anchor = button.sticky)
 
             for label in self.labelsList:
-                label.label.place(x=label.pos[0], y=label.pos[1])
+                label.label.place(x=label.pos[0], y=label.pos[1], anchor = label.sticky)
             
             for textBox in self.textBoxesList:
-                textBox.textBox.place(x=textBox.pos[0], y=textBox.pos[1])
+                textBox.textBox.place(x=textBox.pos[0], y=textBox.pos[1], anchor = textBox.sticky)
 
 #########################################################################################
 
-    def loadDummy(self, rootWidth, rootHeight):
-        labelWidth = int(rootWidth/self.numColumns)
-        labelHeight = int(rootHeight/self.numRows)
+    def loadDummy(self):
+        labelWidth = int(self.rootWidth/self.numColumns)
+        labelHeight = int(self.rootHeight/self.numRows)
         for c in range(self.numColumns):
             for r in range(self.numRows):
                 # color  = random.randint(100000, 999999)
@@ -122,7 +128,22 @@ class Screen():
             frame.frame.destroy()
 
 #########################################################################################
+
+    def structuralize(self):
+        self.mapStructures()
+        self.structuralizer = Structuralizer(self.structureDictionary)
     
-    
-    
-    
+#########################################################################################
+
+    def mapStructures(self):
+        for button in self.buttonsList:
+            if button.structure in self.structureDictionary:
+                self.structureDictionary[button.structure].elementsList.append(button)
+        for label in self.labelsList:
+            if label.structure in self.structureDictionary:
+                self.structureDictionary[label.structure].elementsList.append(label)
+        for textBox in self.textBoxesList:
+            if textBox.structure in self.structureDictionary:
+                self.structureDictionary[textBox.structure].elementsList.append(textBox)
+
+#########################################################################################

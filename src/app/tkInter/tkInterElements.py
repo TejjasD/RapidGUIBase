@@ -21,6 +21,7 @@ class Button:
         self.rowSpan = 0
         self.columnStart = 0
         self.columnSpan = 0
+        self.structure = 0
 
         self.implButtonInstanceData()
         self.createButton()
@@ -35,6 +36,7 @@ class Button:
         self.columnStart = int(self.buttonInstanceData[5])-1
         self.columnSpan = int(self.buttonInstanceData[6])-self.columnStart
         self.sticky = self.buttonInstanceData[7]
+        self.structure  = self.buttonInstanceData[10]
         
         if not isinstance(self.sticky, str):
             if math.isnan(self.sticky):
@@ -75,6 +77,7 @@ class Label:
         self.rowSpan = 0
         self.columnStart = 0
         self.columnSpan = 0
+        self.structure = 0
 
         self.implLabelInstanceData()
         self.createLabel()
@@ -89,6 +92,8 @@ class Label:
         self.columnStart = int(self.labelInstanceData[5])-1
         self.columnSpan = int(self.labelInstanceData[6])-self.columnStart
         self.sticky = self.labelInstanceData[7]
+        self.structure  = self.labelInstanceData[10]
+
         if not isinstance(self.sticky, str):
             if math.isnan(self.sticky):
                 self.sticky = ""
@@ -118,6 +123,7 @@ class TextBox:
         self.rowSpan = 0
         self.columnStart = 0
         self.columnSpan = 0
+        self.structure  = None
 
         self.impltextBoxInstanceData()
         self.createtextBox()
@@ -132,6 +138,7 @@ class TextBox:
         self.columnStart = int(self.textBoxInstanceData[5])-1
         self.columnSpan = int(self.textBoxInstanceData[6])-self.columnStart
         self.sticky = self.textBoxInstanceData[7]
+        self.structure  = self.textBoxInstanceData[9]
 
         if not isinstance(self.sticky, str):
             if math.isnan(self.sticky):

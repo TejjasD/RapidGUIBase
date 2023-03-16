@@ -1,5 +1,6 @@
 type,foregroundColor,backgroundColor,font,fontSize
 0,#99004d,#a8984d,Andalus,15
-1,#99004d,#a8984d,Andalus,10
+1,#99004d,#a8984d,Andalus,15
 2,#99004d,#a8984d,Andalus,40
 3,#000000,#a8984d,Andalus,8
+4,#99004d,#a8984d,Andalus,10

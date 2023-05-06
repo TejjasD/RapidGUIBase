@@ -19,7 +19,6 @@ class TextBox(Element):
         self.columnStart = int(self.instanceData[5]) - 1
         self.columnSpan = int(self.instanceData[6]) - self.columnStart
         self.sticky = self.instanceData[7]
-        self.structure  = self.instanceData[9]
 
         if not isinstance(self.sticky, str):
             if math.isnan(self.sticky):

@@ -24,7 +24,7 @@ class Element:
         self.rowSpan = 0
         self.columnStart = 0
         self.columnSpan = 0
-        self.structure = 0
+        self.sticky = "center"
 
         self.implInstanceData()
         self.createElement()

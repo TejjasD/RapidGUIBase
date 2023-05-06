@@ -3,8 +3,7 @@
 from gui.tkInter.elements.button import Button
 from gui.tkInter.elements.label import Label
 from gui.tkInter.elements.textBox import TextBox
-from gui.tkInter.elements.dummyFrame import DummyFrame
-from gui.structuralizer.structureManager import StructureManager
+from gui.gridMaker.gridMaker import GridMaker
 
 #########################################################################################
 
@@ -17,9 +16,6 @@ class Screen():
         self.uiAssets = uiAssets
         self.rootWidth = rootWidth
         self.rootHeight = rootHeight
-
-        self.structureManager = StructureManager(self.layoutAssets['structure'], self.rootWidth, self.rootHeight)
-        self.structureDictionary = self.structureManager.structureDictionary
 
         self.buttonsList = []
         self.labelsList = []
@@ -37,6 +33,8 @@ class Screen():
         self.bgColor = None
 
         self.loadConfigs()
+
+        self.gridMaker = GridMaker(self.rootWidth, self.rootHeight, self.numRows, self.numColumns)
     
 #########################################################################################
 
@@ -55,9 +53,6 @@ class Screen():
 #########################################################################################
 
     def loadScreen(self, eventHandler):
-
-        if self.mode == "grid":
-            self.loadDummy()
     
         for b in range(self.buttonInstanceData.shape[0]):
             buttonId = self.buttonInstanceData.iloc[b][0]
@@ -77,45 +72,14 @@ class Screen():
 #########################################################################################
   
     def build(self):
-        if self.mode == 'grid':
+        for button in self.buttonsList:
+            button.element.place(x=button.pos[0], y=button.pos[1], anchor = button.sticky)
 
-            for frame in self.dummyFrames:
-                frame.element.grid(row=frame.row, column=frame.column)
-
-            for button in self.buttonsList:
-                button.element.grid()
-                button.element.grid(row=button.rowStart, rowspan=button.rowSpan, column=button.columnStart, columnspan=button.columnSpan, sticky=button.sticky)
-                button.element.lift()
-
-            for label in self.labelsList:
-                label.element.grid(row=label.rowStart, rowspan=label.rowSpan, column=label.columnStart, columnspan=label.columnSpan, sticky=label.sticky)
-                label.element.lift()
-
-            for textBox in self.textBoxesList:
-                textBox.element.grid(row=textBox.rowStart, rowspan=textBox.rowSpan, column=textBox.columnStart, columnspan=textBox.columnSpan, sticky=textBox.sticky)
-                textBox.element.lift()
-
-        else:
-            for button in self.buttonsList:
-                button.element.place(x=button.pos[0], y=button.pos[1], anchor = button.sticky)
-
-            for label in self.labelsList:
-                label.element.place(x=label.pos[0], y=label.pos[1], anchor = label.sticky)
-            
-            for textBox in self.textBoxesList:
-                textBox.element.place(x=textBox.pos[0], y=textBox.pos[1], anchor = textBox.sticky)
-
-#########################################################################################
-
-    def loadDummy(self):
-        labelWidth = int(self.rootWidth/self.numColumns)
-        labelHeight = int(self.rootHeight/self.numRows)
-        for c in range(self.numColumns):
-            for r in range(self.numRows):
-                # color  = random.randint(100000, 999999)
-                # frame = DummyFrame("#"+str(color), labelWidth, labelHeight, r, c)
-                frame = DummyFrame(self.bgColor, labelWidth, labelHeight, r, c)
-                self.dummyFrames.append(frame)
+        for label in self.labelsList:
+            label.element.place(x=label.pos[0], y=label.pos[1], anchor = label.sticky)
+        
+        for textBox in self.textBoxesList:
+            textBox.element.place(x=textBox.pos[0], y=textBox.pos[1], anchor = textBox.sticky)
 
 #########################################################################################
 
@@ -131,18 +95,13 @@ class Screen():
 
 #########################################################################################
 
-    def structuralize(self):
-        self.mapStructures()
-        self.structureManager.structuralize()
-    
-#########################################################################################
-
-    def mapStructures(self):
-        for button in self.buttonsList:
-            self.structureManager.addElement(button)
-        for label in self.labelsList:
-            self.structureManager.addElement(label)
-        for textBox in self.textBoxesList:
-            self.structureManager.addElement(textBox)
+    def updateGrid(self):
+        if self.mode == "grid":
+            for button in self.buttonsList:
+                self.gridMaker.positionElement(button)
+            for label in self.labelsList:
+                self.gridMaker.positionElement(label)
+            for textBox in self.textBoxesList:
+                self.gridMaker.positionElement(textBox)
 
 #########################################################################################

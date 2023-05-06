@@ -15,7 +15,7 @@ class ScreenManager:
         self.rootHeight = rootHeight
 
         self.loadScreens()
-        self.structuralizeScreens()
+        self.updateScreenGrid()
 
 
 #########################################################################################
@@ -37,5 +37,11 @@ class ScreenManager:
     def structuralizeScreens(self):
         for screen in self.screensList:
             screen.structuralize()
+
+#########################################################################################
+
+    def updateScreenGrid(self):
+        for screen in self.screensList:
+            screen.updateGrid()
 
 #########################################################################################

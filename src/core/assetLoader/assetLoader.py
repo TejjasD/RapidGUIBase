@@ -49,7 +49,6 @@ class AssetLoader:
             screenAssetDictionary['label'] = pd.read_excel(fileName, sheet_name="Labels")
             screenAssetDictionary['textBox'] = pd.read_excel(fileName, sheet_name="TextBoxes")
             screenAssetDictionary['screen'] = pd.read_excel(fileName, sheet_name='Screen')
-            screenAssetDictionary['structure']  = pd.read_excel(fileName, sheet_name="Structures")
             screensAssetDictionary[screen] = screenAssetDictionary
         self.assetsDictionary['layout'] = screensAssetDictionary
 

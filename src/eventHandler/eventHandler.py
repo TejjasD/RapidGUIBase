@@ -1,7 +1,5 @@
 # Built by Tejas Deolasee
 
-from app.tkInter.tkInterElements import *
-
 #########################################################################################
 
 class eventHandler:
@@ -13,8 +11,8 @@ class eventHandler:
         
     def btLogin0(self):
         screen = self.root.screenManager.screensList[self.root.screenNumber]
-        loginId = screen.textBoxDict['tbUserId0'].textBox.get()
-        password = screen.textBoxDict['tbPassword0'].textBox.get()
+        loginId = screen.textBoxDict['tbUserId0'].element.get()
+        password = screen.textBoxDict['tbPassword0'].element.get()
         if self.root.passwordManager.authenticateUser(loginId, password):
             screen.destroy()
             self.root.changeScreen(1)

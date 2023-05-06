@@ -1,6 +1,9 @@
 # Built by Tejas Deolasee
 
-from app.tkInter.tkInterElements import *
+from app.tkInter.elements.button import Button
+from app.tkInter.elements.label import Label
+from app.tkInter.elements.textBox import TextBox
+from app.tkInter.elements.dummyFrame import DummyFrame
 from app.structuralizer.structureManager import StructureManager
 
 #########################################################################################
@@ -77,30 +80,30 @@ class Screen():
         if self.mode == 'grid':
 
             for frame in self.dummyFrames:
-                frame.frame.grid(row=frame.row, column=frame.column)
+                frame.element.grid(row=frame.row, column=frame.column)
 
             for button in self.buttonsList:
-                button.button.grid()
-                button.button.grid(row=button.rowStart, rowspan=button.rowSpan, column=button.columnStart, columnspan=button.columnSpan, sticky=button.sticky)
-                button.button.lift()
+                button.element.grid()
+                button.element.grid(row=button.rowStart, rowspan=button.rowSpan, column=button.columnStart, columnspan=button.columnSpan, sticky=button.sticky)
+                button.element.lift()
 
             for label in self.labelsList:
-                label.label.grid(row=label.rowStart, rowspan=label.rowSpan, column=label.columnStart, columnspan=label.columnSpan, sticky=label.sticky)
-                label.label.lift()
+                label.element.grid(row=label.rowStart, rowspan=label.rowSpan, column=label.columnStart, columnspan=label.columnSpan, sticky=label.sticky)
+                label.element.lift()
 
             for textBox in self.textBoxesList:
-                textBox.textBox.grid(row=textBox.rowStart, rowspan=textBox.rowSpan, column=textBox.columnStart, columnspan=textBox.columnSpan, sticky=textBox.sticky)
-                textBox.textBox.lift()
+                textBox.element.grid(row=textBox.rowStart, rowspan=textBox.rowSpan, column=textBox.columnStart, columnspan=textBox.columnSpan, sticky=textBox.sticky)
+                textBox.element.lift()
 
         else:
             for button in self.buttonsList:
-                button.button.place(x=button.pos[0], y=button.pos[1], anchor = button.sticky)
+                button.element.place(x=button.pos[0], y=button.pos[1], anchor = button.sticky)
 
             for label in self.labelsList:
-                label.label.place(x=label.pos[0], y=label.pos[1], anchor = label.sticky)
+                label.element.place(x=label.pos[0], y=label.pos[1], anchor = label.sticky)
             
             for textBox in self.textBoxesList:
-                textBox.textBox.place(x=textBox.pos[0], y=textBox.pos[1], anchor = textBox.sticky)
+                textBox.element.place(x=textBox.pos[0], y=textBox.pos[1], anchor = textBox.sticky)
 
 #########################################################################################
 
@@ -118,13 +121,13 @@ class Screen():
 
     def destroy(self):
         for button in self.buttonsList:
-            button.button.destroy()
+            button.element.destroy()
         for label in self.labelsList:
-            label.label.destroy()
+            label.element.destroy()
         for textBox in self.textBoxesList:
-            textBox.textBox.destroy()
+            textBox.element.destroy()
         for frame in self.dummyFrames:
-            frame.frame.destroy()
+            frame.element.destroy()
 
 #########################################################################################
 

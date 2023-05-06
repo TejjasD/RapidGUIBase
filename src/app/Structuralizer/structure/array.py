@@ -43,7 +43,7 @@ class StructureArray :
     def structuralize(self):
         totalLength = 0
         for element in self.elementsList:
-            totalLength += element.button.winfo_reqwidth()
+            totalLength += element.element.winfo_reqwidth()
             totalLength += self.elementSpacing
         totalLength -= self.elementSpacing
 
@@ -74,7 +74,7 @@ class StructureArray :
             if i == 0:
                 self.elementsList[i].pos = (structureStart, posY)
             else:
-                self.elementsList[i].pos = (structureStart + i*(self.elementsList[i-1].button.winfo_reqwidth() + self.conversionFcator + self.elementSpacing), posY)
+                self.elementsList[i].pos = (structureStart + i*(self.elementsList[i-1].element.winfo_reqwidth() + self.conversionFcator + self.elementSpacing), posY)
             self.elementsList[i].sticky = sticky
 
 #########################################################################################

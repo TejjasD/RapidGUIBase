@@ -19,7 +19,7 @@ class Root():
 
         self.width = self.widowConfigs['Value'][0]
         self.height = self.widowConfigs['Value'][1]
-
+        
         self.root = tk.Tk()
         self.numScreens = 1
         self.eventHandler = eventHandler(self)

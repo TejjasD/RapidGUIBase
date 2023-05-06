@@ -37,6 +37,9 @@ class Button:
         self.columnSpan = int(self.buttonInstanceData[6])-self.columnStart
         self.sticky = self.buttonInstanceData[7]
         self.structure  = self.buttonInstanceData[10]
+
+        self.width = self.row[8]
+        self.height = self.row[9]
         
         if not isinstance(self.sticky, str):
             if math.isnan(self.sticky):
@@ -56,8 +59,8 @@ class Button:
                                 text=self.buttonInstanceData[8], 
                                 command=self.command)
         
-        self.button.config(width=self.row[8])
-        self.button.config(height=self.row[9])
+        self.button.config(width=self.width)
+        self.button.config(height=self.height)
 
 
 #########################################################################################

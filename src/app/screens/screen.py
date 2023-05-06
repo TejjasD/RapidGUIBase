@@ -1,10 +1,7 @@
 # Built by Tejas Deolasee
 
-from app.Structuralizer.structuralizer import Structuralizer 
 from app.tkInter.tkInterElements import *
-from app.Structuralizer.structureLoader import StructureLoader
-
-import random
+from app.structuralizer.structureManager import StructureManager
 
 #########################################################################################
 
@@ -17,8 +14,10 @@ class Screen():
         self.uiConfigs = uiConfigs
         self.rootWidth = rootWidth
         self.rootHeight = rootHeight
-        self.structureLoader = StructureLoader(self.layoutConfigs['structure'], self.rootWidth, self.rootHeight)
-        self.structureDictionary = self.structureLoader.structuresDictionary
+
+        self.structureManager = StructureManager(self.layoutConfigs['structure'], self.rootWidth, self.rootHeight)
+        self.structureDictionary = self.structureManager.structureDictionary
+
         self.buttonsList = []
         self.labelsList = []
         self.textBoxesList = []
@@ -131,19 +130,16 @@ class Screen():
 
     def structuralize(self):
         self.mapStructures()
-        self.structuralizer = Structuralizer(self.structureDictionary)
+        self.structureManager.structuralize()
     
 #########################################################################################
 
     def mapStructures(self):
         for button in self.buttonsList:
-            if button.structure in self.structureDictionary:
-                self.structureDictionary[button.structure].elementsList.append(button)
+            self.structureManager.addElement(button)
         for label in self.labelsList:
-            if label.structure in self.structureDictionary:
-                self.structureDictionary[label.structure].elementsList.append(label)
+            self.structureManager.addElement(label)
         for textBox in self.textBoxesList:
-            if textBox.structure in self.structureDictionary:
-                self.structureDictionary[textBox.structure].elementsList.append(textBox)
+            self.structureManager.addElement(textBox)
 
 #########################################################################################

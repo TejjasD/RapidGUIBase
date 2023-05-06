@@ -49,7 +49,7 @@ class configManager:
             screenConfigDictionary['label'] = pd.read_excel(fileName, sheet_name="Labels")
             screenConfigDictionary['textBox'] = pd.read_excel(fileName, sheet_name="TextBoxes")
             screenConfigDictionary['screen'] = pd.read_excel(fileName, sheet_name='Screen')
-            screenConfigDictionary['structure']  =pd.read_excel(fileName, sheet_name="Structures")
+            screenConfigDictionary['structure']  = pd.read_excel(fileName, sheet_name="Structures")
             screensConfigDictionary[screen] = screenConfigDictionary
         self.configDictionary['layout'] = screensConfigDictionary
 

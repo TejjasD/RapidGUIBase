@@ -37,3 +37,5 @@ class ScreenManager:
     def structuralizeScreens(self):
         for screen in self.screensList:
             screen.structuralize()
+
+#########################################################################################

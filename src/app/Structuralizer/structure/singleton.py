@@ -15,6 +15,7 @@ class StructureSingleton:
         self.placement = 0
         self.id = 0
         self.type = "S"
+        self.elementSpacing = 0
         self.elementsList = []
 
         self.implStructure()
@@ -28,6 +29,7 @@ class StructureSingleton:
         self.endX = self.row[4]
         self.startY = self.row[5]
         self.endY = self.row[6]
+        self.elementSpacing = self.row[7]
 
         if self.endX == -1:
             self.endX = self.rootWidth
@@ -39,15 +41,15 @@ class StructureSingleton:
     def structuralize(self):
         if self.placement == "center":
             posX = (self.endX-self.startX)/2
-            posY = (self.endY-self.startY)/2
+            posY = self.startY + (self.endY-self.startY)/2
             sticky = "center"    
         elif self.placement == "e":
             posX = self.endX
-            posY = (self.endY-self.startY)/2
+            posY = self.startY + (self.endY-self.startY)/2
             sticky = "e"
         elif self.placement == "w":
             posX = self.startX
-            posY = (self.endY-self.startY)/2
+            posY = self.startY + (self.endY-self.startY)/2
             sticky = "w"
         elif self.placement == "s":
             posX = (self.endX-self.startX)/2

@@ -6,11 +6,11 @@ from gui.screens.screen import Screen
 
 class ScreenManager:
 
-    def __init__(self, eventHandler, uiConfigs, layoutConfigs, rootWidth, rootHeight):
+    def __init__(self, eventHandler, uiAssets, layoutAssets, rootWidth, rootHeight):
         self.screensList = []
         self.eventHandler = eventHandler
-        self.uiConfigs = uiConfigs
-        self.layoutConfigs = layoutConfigs
+        self.uiAssets = uiAssets
+        self.layoutAssets = layoutAssets
         self.rootWidth = rootWidth
         self.rootHeight = rootHeight
 
@@ -21,9 +21,9 @@ class ScreenManager:
 #########################################################################################
 
     def loadScreens(self):
-        numScreens = len(self.layoutConfigs)
+        numScreens = len(self.layoutAssets)
         for screenNumber in range(numScreens):
-            screenInstance = Screen(screenNumber, self.layoutConfigs[screenNumber], self.uiConfigs, self.rootWidth, self.rootHeight)
+            screenInstance = Screen(screenNumber, self.layoutAssets[screenNumber], self.uiAssets, self.rootWidth, self.rootHeight)
             screenInstance.loadScreen(self.eventHandler)
             self.screensList.append(screenInstance)
 

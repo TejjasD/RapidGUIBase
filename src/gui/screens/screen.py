@@ -11,14 +11,14 @@ from gui.structuralizer.structureManager import StructureManager
 class Screen():
 
 
-    def __init__(self, screenId, layoutConfigs, uiConfigs, rootWidth, rootHeight):
+    def __init__(self, screenId, layoutAsstes, uiAssets, rootWidth, rootHeight):
         self.screenId = screenId
-        self.layoutConfigs = layoutConfigs
-        self.uiConfigs = uiConfigs
+        self.layoutAssets = layoutAsstes
+        self.uiAssets = uiAssets
         self.rootWidth = rootWidth
         self.rootHeight = rootHeight
 
-        self.structureManager = StructureManager(self.layoutConfigs['structure'], self.rootWidth, self.rootHeight)
+        self.structureManager = StructureManager(self.layoutAssets['structure'], self.rootWidth, self.rootHeight)
         self.structureDictionary = self.structureManager.structureDictionary
 
         self.buttonsList = []
@@ -42,11 +42,11 @@ class Screen():
 
     def loadConfigs(self):
 
-        self.buttonInstanceData = self.layoutConfigs['button']
-        self.labelInstanceData = self.layoutConfigs['label']
-        self.textBoxInstanceData = self.layoutConfigs['textBox']
+        self.buttonInstanceData = self.layoutAssets['button']
+        self.labelInstanceData = self.layoutAssets['label']
+        self.textBoxInstanceData = self.layoutAssets['textBox']
 
-        screenConfigValues = self.layoutConfigs['screen']['Value']
+        screenConfigValues = self.layoutAssets['screen']['Value']
         self.mode = screenConfigValues[0]
         self.numRows = screenConfigValues[1]
         self.numColumns = screenConfigValues[2]
@@ -61,16 +61,16 @@ class Screen():
     
         for b in range(self.buttonInstanceData.shape[0]):
             buttonId = self.buttonInstanceData.iloc[b][0]
-            buttonInstance = Button(self.uiConfigs['button'], list(self.buttonInstanceData.iloc[b]), getattr(eventHandler, buttonId))
+            buttonInstance = Button(self.uiAssets['button'], list(self.buttonInstanceData.iloc[b]), getattr(eventHandler, buttonId))
             self.buttonsList.append(buttonInstance)
         
         for l in range(self.labelInstanceData.shape[0]):
-            labelInstance = Label(self.uiConfigs['label'], list(self.labelInstanceData.iloc[l]))
+            labelInstance = Label(self.uiAssets['label'], list(self.labelInstanceData.iloc[l]))
             self.labelsList.append(labelInstance)
         
         for t in range(self.textBoxInstanceData.shape[0]):
             textBoxId = self.textBoxInstanceData.iloc[t][0]
-            textBoxInstance = TextBox(self.uiConfigs['textBox'], list(self.textBoxInstanceData.iloc[t]))
+            textBoxInstance = TextBox(self.uiAssets['textBox'], list(self.textBoxInstanceData.iloc[t]))
             self.textBoxesList.append(textBoxInstance)
             self.textBoxDict[textBoxId] = textBoxInstance
 

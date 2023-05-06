@@ -8,9 +8,9 @@ import math
 
 class Element:
 
-    def __init__(self, uiConfigs, instancedata, command = None):
+    def __init__(self, uiAssets, instancedata, command = None):
         self.type = None
-        self.uiConfigs = uiConfigs
+        self.uiAssets = uiAssets
         self.instanceData = instancedata
         self.command = command
         self.id = 0

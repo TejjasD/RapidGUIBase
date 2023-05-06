@@ -13,7 +13,7 @@ class Label(Element):
         self.type = "label"
         self.id = self.instanceData[0]
         self.pos = (self.instanceData[1], self.instanceData[2])
-        self.row = list(self.uiConfigs.iloc[self.instanceData[9]])
+        self.row = list(self.uiAssets.iloc[self.instanceData[9]])
         
         self.rowStart = int(self.instanceData[3])-1
         self.rowSpan = int(self.instanceData[4]) - self.rowStart

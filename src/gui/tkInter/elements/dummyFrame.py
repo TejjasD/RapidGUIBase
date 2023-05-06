@@ -10,6 +10,7 @@ import math
 class DummyFrame(Element):
 
     def __init__(self, bgColor, width, height, row, column):
+        self.type - "dummyFrame"
         self.bgColor = bgColor
         self.width = width
         self.height = height

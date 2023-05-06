@@ -9,9 +9,10 @@ import math
 class TextBox(Element):
 
     def implInstanceData(self):
+        self.type = "textBox"
         self.id = self.instanceData[0]
         self.pos = (self.instanceData[1], self.instanceData[2])
-        self.row = list(self.uiConfigs.iloc[int(self.instanceData[8])])
+        self.row = list(self.uiAssets.iloc[int(self.instanceData[8])])
 
         self.rowStart = int(self.instanceData[3]) - 1
         self.rowSpan = int(self.instanceData[4]) - self.rowStart

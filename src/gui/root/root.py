@@ -1,6 +1,6 @@
 # Built by Tejas Deolasee
 
-from core.configManager.configManager import configManager
+from core.assetLoader.assetLoader import AssetLoader
 from gui.screens.screenManager import ScreenManager
 from eventHandler.eventHandler import eventHandler
 from user.passwordManager.passwordManager import passwordManager 
@@ -12,18 +12,18 @@ import tkinter as tk
 class Root():
     
     def __init__(self):
-        self.configManager = configManager()
-        self.widowConfigs = self.configManager.configDictionary['root']['window']
-        self.layoutConfigs = self.configManager.configDictionary['layout']
-        self.uiConfigs = self.configManager.configDictionary['tkInterUI']
+        self.assetLoader = AssetLoader()
+        self.widowAssets = self.assetLoader.assetsDictionary['root']['window']
+        self.layoutAssets = self.assetLoader.assetsDictionary['layout']
+        self.uiAssets = self.assetLoader.assetsDictionary['tkInterUI']
 
-        self.width = self.widowConfigs['Value'][0]
-        self.height = self.widowConfigs['Value'][1]
+        self.width = self.widowAssets['Value'][0]
+        self.height = self.widowAssets['Value'][1]
         
         self.root = tk.Tk()
         self.numScreens = 1
         self.eventHandler = eventHandler(self)
-        self.screenManager = ScreenManager(self.eventHandler, self.uiConfigs, self.layoutConfigs,  self.width, self.height)
+        self.screenManager = ScreenManager(self.eventHandler, self.uiAssets, self.layoutAssets,  self.width, self.height)
         self.screenNumber = 0
         self.passwordManager = passwordManager()
 

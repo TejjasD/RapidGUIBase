@@ -88,7 +88,7 @@ class eventHandler:
 #########################################################################################
 
     def btConfirmField2(self):
-        fieldName = self.tempTextBoxes[0].get()
+        fieldName = self.tempTextBoxes[0].get() + " :"
 
         if fieldName != "":     
             rowStart = self.tempLabels[0].rowStart 

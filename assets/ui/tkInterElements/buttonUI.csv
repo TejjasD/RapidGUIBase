@@ -2,3 +2,4 @@ type,borderWidth,backgroundColor,foregroundColor,activeBackgroundColor,activeFor
 0,3,#99ccff,#333300,#3366ff,#ffffff,Andalus,10,10,1,#99ff99,5,5,groove
 1,5,#99ccff,#333300,#3366ff,#ffffff,Andalus,15,20,2,#99ff99,10,10,groove
 2,3,#3366ff,#ffffff,#99ccff,#333300,Andalus,10,10,1,#99ff99,5,5,groove
+3,3,#99ccff,#333300,#3366ff,#ffffff,Andalus,10,8,1,#99ff99,5,5,groove

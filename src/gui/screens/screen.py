@@ -21,7 +21,6 @@ class Screen():
         self.labelsList = []
         self.textBoxesList = []
         self.textBoxDict = {}
-        self.dummyFrames = []
         
         self.buttonInstanceData = None
         self.labelInstanceData = None
@@ -73,25 +72,23 @@ class Screen():
   
     def build(self):
         for button in self.buttonsList:
-            button.element.place(x=button.pos[0], y=button.pos[1], anchor = button.sticky)
+            button.place(button.pos[0], button.pos[1], button.sticky)
 
         for label in self.labelsList:
-            label.element.place(x=label.pos[0], y=label.pos[1], anchor = label.sticky)
+            label.place(label.pos[0], label.pos[1], label.sticky)
         
         for textBox in self.textBoxesList:
-            textBox.element.place(x=textBox.pos[0], y=textBox.pos[1], anchor = textBox.sticky)
+            textBox.place(textBox.pos[0], textBox.pos[1], textBox.sticky)
 
 #########################################################################################
 
     def destroy(self):
         for button in self.buttonsList:
-            button.element.destroy()
+            button.destroy()
         for label in self.labelsList:
-            label.element.destroy()
+            label.destroy()
         for textBox in self.textBoxesList:
-            textBox.element.destroy()
-        for frame in self.dummyFrames:
-            frame.element.destroy()
+            textBox.destroy()
 
 #########################################################################################
 

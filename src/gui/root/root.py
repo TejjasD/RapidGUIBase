@@ -21,10 +21,10 @@ class Root():
         self.height = self.widowAssets['Value'][1]
         
         self.root = tk.Tk()
-        self.numScreens = 1
         self.eventHandler = eventHandler(self)
         self.screenManager = ScreenManager(self.eventHandler, self.uiAssets, self.layoutAssets,  self.width, self.height)
         self.screenNumber = 0
+        self.activeScreen = self.screenManager.screensList[self.screenNumber]
         self.passwordManager = passwordManager()
 
         self.setConfigs()
@@ -50,6 +50,7 @@ class Root():
 
     def changeScreen(self, newScreenNumber):
         self.screenNumber = newScreenNumber
+        self.activeScreen = self.screenManager.screensList[self.screenNumber]
         self.build()
 
 #########################################################################################

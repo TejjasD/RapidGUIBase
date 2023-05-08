@@ -1,6 +1,6 @@
 # Built by Tejas Deolasee
 
-from gui.screens.screen import Screen
+from gui.screen.screen import Screen
 
 #########################################################################################
 

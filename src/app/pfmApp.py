@@ -1,7 +1,7 @@
 # Built by Tejas Deolasee
 
 from core.assetLoader.assetLoader import AssetLoader
-from gui.screens.screenManager import ScreenManager
+from gui.screen.screenManager import ScreenManager
 from gui.tkInter.manager.tkIntermanager import TkInterManager
 from eventHandler.eventHandler import eventHandler
 from user.passwordManager.passwordManager import passwordManager 

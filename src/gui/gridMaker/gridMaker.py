@@ -61,8 +61,9 @@ class GridMaker:
 #########################################################################################
 
     def positionElement(self, element):
-        pos = self.getElementPos(element.columnStart, element.columnSpan, element.rowStart, element.rowSpan, element.sticky)
-        element.pos = pos
+        if (element.columnStart is not None):
+            pos = self.getElementPos(element.columnStart, element.columnSpan, element.rowStart, element.rowSpan, element.sticky)
+            element.pos = pos
 
 #########################################################################################
 

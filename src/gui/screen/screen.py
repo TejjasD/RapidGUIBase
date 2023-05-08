@@ -23,7 +23,7 @@ class Screen():
         self.labelInstanceData = None
         self.textBoxInstanceData = None
         
-        self.mode = "space"
+        self.scrollbar = False
         self.numRows = 0
         self.numColumns = 0
         self.bgColor = None
@@ -44,10 +44,10 @@ class Screen():
         self.textBoxInstanceData = self.layoutAssets['textBox']
 
         screenConfigValues = self.layoutAssets['screen']['Value']
-        self.mode = screenConfigValues[0]
-        self.numRows = screenConfigValues[1]
-        self.numColumns = screenConfigValues[2]
-        self.bgColor = screenConfigValues[3]
+        self.numRows = screenConfigValues[0]
+        self.numColumns = screenConfigValues[1]
+        self.bgColor = screenConfigValues[2]
+        self.scrollbar = screenConfigValues[3]
 
 #########################################################################################
 
@@ -73,16 +73,19 @@ class Screen():
     def loadDynamicElements(self):
 
         for button in self.buttonsList:
-            if (button.rowStart < 0 or button.columnStart < 0):
-                self.dynamicElements.append(button)
+            if (button.rowStart is not None):
+                if (button.rowStart < 0 or button.columnStart < 0):
+                    self.dynamicElements.append(button)
 
         for label in self.labelsList:
-            if (label.rowStart < 0 or label.columnStart < 0):
-                self.dynamicElements.append(label)
+            if (label.rowStart is not None):
+                if (label.rowStart < 0 or label.columnStart < 0):
+                    self.dynamicElements.append(label)
         
         for textBox in self.textBoxesList:
-           if (textBox.rowStart < 0 or textBox.columnStart < 0):
-                self.dynamicElements.append(textBox)
+            if (textBox.rowStart is not None):
+                if (textBox.rowStart < 0 or textBox.columnStart < 0):
+                    self.dynamicElements.append(textBox)
 
 #########################################################################################      
   
@@ -111,13 +114,12 @@ class Screen():
 #########################################################################################
 
     def updateGrid(self):
-        if self.mode == "grid":
-            for button in self.buttonsList:
-                self.gridMaker.positionElement(button)
-            for label in self.labelsList:
-                self.gridMaker.positionElement(label)
-            for textBox in self.textBoxesList:
-                self.gridMaker.positionElement(textBox)
+        for button in self.buttonsList:
+            self.gridMaker.positionElement(button)
+        for label in self.labelsList:
+            self.gridMaker.positionElement(label)
+        for textBox in self.textBoxesList:
+            self.gridMaker.positionElement(textBox)
 
 #########################################################################################
 

@@ -13,10 +13,10 @@ class TextBox(Element):
         self.id = self.instanceData[0]
         self.pos = (self.instanceData[1], self.instanceData[2])
 
-        self.rowStart = int(self.instanceData[3]) - 1
-        self.rowSpan = int(self.instanceData[4]) - self.rowStart
-        self.columnStart = int(self.instanceData[5]) - 1
-        self.columnSpan = int(self.instanceData[6]) - self.columnStart
+        self.rowStart = int(self.instanceData[3])
+        self.rowSpan = int(self.instanceData[4]) - self.rowStart + 1
+        self.columnStart = int(self.instanceData[5])
+        self.columnSpan = int(self.instanceData[6]) - self.columnStart + 1
         self.sticky = self.instanceData[7]
 
         if not isinstance(self.sticky, str):
@@ -32,6 +32,10 @@ class TextBox(Element):
                                 highlightcolor = self.uiAssets[6],  
                                 relief = self.uiAssets[7],
                                 width = self.uiAssets[8])
-        # self.element.config(height)
+
+#########################################################################################
+
+    def get(self):
+        return self.element.get()
 
 #########################################################################################

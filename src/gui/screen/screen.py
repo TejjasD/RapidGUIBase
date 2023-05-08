@@ -7,17 +7,17 @@ from gui.gridMaker.gridMaker import GridMaker
 class Screen():
 
 
-    def __init__(self, screenId, layoutAsstes, rootWidth, rootHeight, tkInterManager):
+    def __init__(self, screenId, layoutAsstes, tkInterManager, root):
         self.screenId = screenId
         self.layoutAssets = layoutAsstes
-        self.rootWidth = rootWidth
-        self.rootHeight = rootHeight
         self.tkInterManager = tkInterManager
+        self.root = root
 
         self.buttonsList = []
         self.labelsList = []
         self.textBoxesList = []
         self.textBoxDict = {}
+        self.dynamicElements = []
         
         self.buttonInstanceData = None
         self.labelInstanceData = None
@@ -30,7 +30,10 @@ class Screen():
 
         self.loadConfigs()
 
-        self.gridMaker = GridMaker(self.rootWidth, self.rootHeight, self.numRows, self.numColumns)
+        self.activeRow = self.numRows
+        self.activeColumn = self.numColumns
+
+        self.gridMaker = GridMaker(self, self.root.width, self.root.height, self.numRows, self.numColumns)
     
 #########################################################################################
 
@@ -66,8 +69,26 @@ class Screen():
             self.textBoxDict[textBoxId] = textBoxInstance
 
 #########################################################################################
+
+    def loadDynamicElements(self):
+
+        for button in self.buttonsList:
+            if (button.rowStart < 0 or button.columnStart < 0):
+                self.dynamicElements.append(button)
+
+        for label in self.labelsList:
+            if (label.rowStart < 0 or label.columnStart < 0):
+                self.dynamicElements.append(label)
+        
+        for textBox in self.textBoxesList:
+           if (textBox.rowStart < 0 or textBox.columnStart < 0):
+                self.dynamicElements.append(textBox)
+
+#########################################################################################      
   
     def build(self):
+        self.root.setBgColor(self.bgColor)
+        
         for button in self.buttonsList:
             button.place(button.pos[0], button.pos[1], button.sticky)
 
@@ -97,5 +118,24 @@ class Screen():
                 self.gridMaker.positionElement(label)
             for textBox in self.textBoxesList:
                 self.gridMaker.positionElement(textBox)
+
+#########################################################################################
+
+    def addRow(self):
+        self.activeRow += 1
+        self.rePositionDynamicElements()
+
+#########################################################################################
+
+    def addColumn(self):
+        self.activeColumn += 1
+        self.rePositionDynamicElements()
+    
+#########################################################################################
+
+    def rePositionDynamicElements(self):
+        for element in self.dynamicElements:
+            self.gridMaker.positionElement(element)
+            element.place(element.pos[0], element.pos[1], element.sticky)
 
 #########################################################################################

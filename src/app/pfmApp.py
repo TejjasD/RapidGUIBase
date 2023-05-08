@@ -33,7 +33,6 @@ class PfmApp():
 #########################################################################################
     
     def build(self):
-        self.root.build(self.screenManager.screensList[self.screenNumber].bgColor)
         self.screenManager.buildScreen(self.screenNumber)
 
 #########################################################################################

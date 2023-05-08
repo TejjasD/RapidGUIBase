@@ -4,31 +4,27 @@
 
 class GridMaker:
 
-    def __init__(self, rootWidth, rootHeight, numRows , numCols):
+    def __init__(self, screen, rootWidth, rootHeight, numRows , numCols):
+        self.screen = screen
         self.width = rootWidth
         self.height = rootHeight
         self.numCols = numCols
         self.numRows = numRows
-        self.buffer = 10
+        self.xBuffer = 10
+        self.yBuffer = 10
         self.columnWidth = 0
         self.rowHeight = 0
         self.posMatrix = [[(0, 0) for j in range(numCols)] for i in range(numRows)]
 
 
-        self.calculateCellPoses()
+        self.calculateCellDimensions()
 
 
 #########################################################################################
 
-    def calculateCellPoses(self):
-        self.columnWidth = int((self.width - (2 * self.buffer)) / self.numCols)
-        self.rowHeight = int((self.height - (2 * self.buffer)) / self.numRows)
-
-        shiftedOrigin = (self.buffer, self.buffer)
-
-        for i in range(self.numRows):
-            for j in range(self.numCols):
-                self.posMatrix[i][j] = (shiftedOrigin[0] + (j * self.columnWidth), shiftedOrigin[1] + (i * self.rowHeight))
+    def calculateCellDimensions(self):
+        self.columnWidth = int((self.width - (2 * self.xBuffer)) / self.numCols)
+        self.rowHeight = int((self.height - (2 * self.yBuffer)) / self.numRows)
 
 #########################################################################################
 
@@ -36,7 +32,7 @@ class GridMaker:
         width = columnSpan * self.columnWidth
         height = rowSpan * self.rowHeight
 
-        cellOrigin = self.posMatrix[rowStart][columnStart]
+        cellOrigin = self.cellPosition(columnStart, rowStart)
 
         pos = (0, 0)
         if placement == "center":
@@ -69,6 +65,18 @@ class GridMaker:
         element.pos = pos
 
 #########################################################################################
+
+    def cellPosition(self, column, row):
+        if column < 0:
+            column = self.screen.activeColumn + column - 1
+        if row < 0:
+            row = self.screen.activeRow + row - 1
+        x = self.xBuffer + (column * self.columnWidth)
+        y = self.yBuffer + (row * self.rowHeight)
+        return (x, y)
+
+#########################################################################################
+
 
 
 

@@ -1,15 +1,11 @@
 # Built by Tejas Deolasee
 
-from gui.tkInter.elements.button import Button
-from gui.tkInter.elements.textBox import TextBox
-from gui.tkInter.elements.label import Label
-
 #########################################################################################
 
 class eventHandler:
 
-    def __init__(self, root):
-        self.root = root
+    def __init__(self, app):
+        self.app = app
         self.tempLabels = []
         self.tempButtons = []
         self.tempTextBoxes = []
@@ -18,12 +14,12 @@ class eventHandler:
 #########################################################################################
         
     def btLogin0(self):
-        screen = self.root.screenManager.screensList[self.root.screenNumber]
+        screen = self.app.screenManager.screensList[self.app.screenNumber]
         loginId = screen.textBoxDict['tbUserId0'].get()
         password = screen.textBoxDict['tbPassword0'].get()
-        if self.root.passwordManager.authenticateUser(loginId, password):
+        if self.app.passwordManager.authenticateUser(loginId, password):
             screen.destroy()
-            self.root.changeScreen(1)
+            self.app.changeScreen(1)
 
 #########################################################################################
 
@@ -33,8 +29,8 @@ class eventHandler:
 #########################################################################################
 
     def btAddMonth1(self):
-        self.root.screenManager.screensList[self.root.screenNumber].destroy()
-        self.root.changeScreen(2)
+        self.app.screenManager.screensList[self.app.screenNumber].destroy()
+        self.app.changeScreen(2)
 
 #########################################################################################
 
@@ -56,7 +52,7 @@ class eventHandler:
     def btAddField2(self):
 
         if  not self.btAddField2Lock:
-            labelData = self.root.activeScreen.labelInstanceData
+            labelData = self.app.activeScreen.labelInstanceData
             
             maxRow = 0
             for i in range(len(labelData['columnStart'])):
@@ -66,17 +62,17 @@ class eventHandler:
 
             textBoxinstanceData = ["tbFieldName2", 0, 0, maxRow + 1, maxRow + 1, 10, 11, "w", 0]
             labelInstanceData = ["lbFieldName2", 0, 0, maxRow + 1, maxRow + 1, 8, 9, "e", "Enter Field Name :", 5]
-            fieldNameTextbox = TextBox(self.root.activeScreen.uiAssets['textBox'], textBoxinstanceData)  
-            fieldNameLabel = Label(self.root.activeScreen.uiAssets['label'], labelInstanceData)
+            fieldNameTextbox = self.app.tkInterManager.createTextBox(textBoxinstanceData)  
+            fieldNameLabel = self.app.tkInterManager.createLabel(labelInstanceData)
 
-            self.root.activeScreen.gridMaker.positionElement(fieldNameTextbox)
-            self.root.activeScreen.gridMaker.positionElement(fieldNameLabel)
+            self.app.activeScreen.gridMaker.positionElement(fieldNameTextbox)
+            self.app.activeScreen.gridMaker.positionElement(fieldNameLabel)
             fieldNameTextbox.place(fieldNameTextbox.pos[0], fieldNameTextbox.pos[1], fieldNameTextbox.sticky)
             fieldNameLabel.place(fieldNameLabel.pos[0], fieldNameLabel.pos[1], fieldNameLabel.sticky)
 
             buttonInstancedata = ["btConfirmField2", 0, 0, maxRow + 1, maxRow + 1, 12, 13, "center", "Confirm Field", 3]
-            confirmFieldButton = Button(self.root.activeScreen.uiAssets["button"], buttonInstancedata, getattr(self, "btConfirmField2"))
-            self.root.activeScreen.gridMaker.positionElement(confirmFieldButton)
+            confirmFieldButton = self.app.tkInterManager.createButton(buttonInstancedata, getattr(self, "btConfirmField2"))
+            self.app.activeScreen.gridMaker.positionElement(confirmFieldButton)
             confirmFieldButton.place(confirmFieldButton.pos[0], confirmFieldButton.pos[1], confirmFieldButton.sticky)
 
             self.tempLabels.append(fieldNameLabel)
@@ -96,11 +92,11 @@ class eventHandler:
 
             textBoxinstanceData = ["tbNewField2", 0, 0, rowStart + 1, rowEnd + 1, 10, 11, "w", 0]
             labelInstanceData = ["lbNewField2", 0, 0, rowStart + 1, rowEnd + 1, 8, 9, "e", fieldName, 3]
-            fieldNameTextbox = TextBox(self.root.activeScreen.uiAssets['textBox'], textBoxinstanceData)  
-            fieldNameLabel = Label(self.root.activeScreen.uiAssets['label'], labelInstanceData)
+            fieldNameTextbox = self.app.tkInterManager.createTextBox(textBoxinstanceData)  
+            fieldNameLabel = self.app.tkInterManager.createLabel(labelInstanceData)
 
-            self.root.activeScreen.gridMaker.positionElement(fieldNameTextbox)
-            self.root.activeScreen.gridMaker.positionElement(fieldNameLabel)
+            self.app.activeScreen.gridMaker.positionElement(fieldNameTextbox)
+            self.app.activeScreen.gridMaker.positionElement(fieldNameLabel)
             fieldNameTextbox.place(fieldNameTextbox.pos[0], fieldNameTextbox.pos[1], fieldNameTextbox.sticky)
             fieldNameLabel.place(fieldNameLabel.pos[0], fieldNameLabel.pos[1], fieldNameLabel.sticky)
 

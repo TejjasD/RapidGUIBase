@@ -2,6 +2,7 @@
 
 from core.assetLoader.assetLoader import AssetLoader
 from gui.screens.screenManager import ScreenManager
+from gui.tkInter.manager.tkIntermanager import TkInterManager
 from eventHandler.eventHandler import eventHandler
 from user.passwordManager.passwordManager import passwordManager 
 
@@ -9,41 +10,30 @@ import tkinter as tk
 
 #########################################################################################
 
-class Root():
+class PfmApp():
     
     def __init__(self):
         self.assetLoader = AssetLoader()
-        self.widowAssets = self.assetLoader.assetsDictionary['root']['window']
-        self.layoutAssets = self.assetLoader.assetsDictionary['layout']
-        self.uiAssets = self.assetLoader.assetsDictionary['tkInterUI']
+        self.tkInterManager = TkInterManager(self.assetLoader.assetsDictionary['tkInterUI'])
+        self.root = self.tkInterManager.createRoot(self.assetLoader.assetsDictionary['root']['window']["Value"])
 
-        self.width = self.widowAssets['Value'][0]
-        self.height = self.widowAssets['Value'][1]
-        
-        self.root = tk.Tk()
         self.eventHandler = eventHandler(self)
-        self.screenManager = ScreenManager(self.eventHandler, self.uiAssets, self.layoutAssets,  self.width, self.height)
+        self.screenManager = ScreenManager(self.eventHandler, self.assetLoader.assetsDictionary['layout'] , self.tkInterManager, self.root)
         self.screenNumber = 0
         self.activeScreen = self.screenManager.screensList[self.screenNumber]
         self.passwordManager = passwordManager()
 
-        self.setConfigs()
         self.build()
           
 #########################################################################################
 
     def run(self):
-        self.root.mainloop()
-
-#########################################################################################
-    
-    def setConfigs(self):
-        self.root.geometry(str(self.width) + "x" + str(self.height))
+        self.root.run()
 
 #########################################################################################
     
     def build(self):
-        self.root.configure(background = self.screenManager.screensList[self.screenNumber].bgColor)
+        self.root.build(self.screenManager.screensList[self.screenNumber].bgColor)
         self.screenManager.buildScreen(self.screenNumber)
 
 #########################################################################################
@@ -54,12 +44,3 @@ class Root():
         self.build()
 
 #########################################################################################
-
-        
-        
-
-        
-
-    
-
-

@@ -4,14 +4,13 @@
 
 class Element:
 
-    def __init__(self, uiAssets, instancedata, command = None):
+    def __init__(self, instancedata, uiAssets = None, command = None):
         self.type = None
         self.uiAssets = uiAssets
         self.instanceData = instancedata
         self.command = command
         self.id = 0
         self.pos = (0, 0)
-        self.row = []
         self.element = None
         self.width = None
         self.height = None
@@ -56,7 +55,15 @@ class Element:
     
 #########################################################################################
 
-       
+    def run(self):
+        if self.type == "root":
+            self.element.mainloop()
+        else:
+            print("--------------------------------------------------------Get Method Called on Wrong Element----------------------------------------------------------------")
+            return
+    
+#########################################################################################
+
 
 
         

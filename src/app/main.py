@@ -2,13 +2,13 @@
 
 import sys
 sys.path.append('src/')
-from gui.root.root import Root
+from app.pfmApp import PfmApp
 
 #########################################################################################
 
 def main():
-    rootInstance = Root()   
-    rootInstance.run()
+    app = PfmApp()   
+    app.run()
 
 #########################################################################################
 

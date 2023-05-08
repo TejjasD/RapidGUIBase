@@ -1,6 +1,6 @@
 # Built by Tejas Deolasee
 
-from gui.tkInter.Element import Element
+from gui.tkInter.elements.element import Element
 import tkinter as tk
 import math
 
@@ -12,7 +12,6 @@ class TextBox(Element):
         self.type = "textBox"
         self.id = self.instanceData[0]
         self.pos = (self.instanceData[1], self.instanceData[2])
-        self.row = list(self.uiAssets.iloc[int(self.instanceData[8])])
 
         self.rowStart = int(self.instanceData[3]) - 1
         self.rowSpan = int(self.instanceData[4]) - self.rowStart
@@ -26,13 +25,13 @@ class TextBox(Element):
     
     
     def createElement(self):
-        self.element = tk.Entry(bd=self.row[1],
-                                bg=self.row[2], 
-                                fg=self.row[3],  
-                                font=(self.row[4], self.row[5]), 
-                                highlightcolor=self.row[6],  
-                                relief=self.row[7],
-                                width=self.row[8])
+        self.element = tk.Entry(bd = self.uiAssets[1],
+                                bg = self.uiAssets[2], 
+                                fg = self.uiAssets[3],  
+                                font = (self.uiAssets[4], self.uiAssets[5]), 
+                                highlightcolor = self.uiAssets[6],  
+                                relief = self.uiAssets[7],
+                                width = self.uiAssets[8])
         # self.element.config(height)
 
 #########################################################################################

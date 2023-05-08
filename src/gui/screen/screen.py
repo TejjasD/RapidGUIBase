@@ -1,8 +1,5 @@
 # Built by Tejas Deolasee
 
-from gui.tkInter.elements.button import Button
-from gui.tkInter.elements.label import Label
-from gui.tkInter.elements.textBox import TextBox
 from gui.gridMaker.gridMaker import GridMaker
 
 #########################################################################################
@@ -10,12 +7,12 @@ from gui.gridMaker.gridMaker import GridMaker
 class Screen():
 
 
-    def __init__(self, screenId, layoutAsstes, uiAssets, rootWidth, rootHeight):
+    def __init__(self, screenId, layoutAsstes, rootWidth, rootHeight, tkInterManager):
         self.screenId = screenId
         self.layoutAssets = layoutAsstes
-        self.uiAssets = uiAssets
         self.rootWidth = rootWidth
         self.rootHeight = rootHeight
+        self.tkInterManager = tkInterManager
 
         self.buttonsList = []
         self.labelsList = []
@@ -55,16 +52,16 @@ class Screen():
     
         for b in range(self.buttonInstanceData.shape[0]):
             buttonId = self.buttonInstanceData.iloc[b][0]
-            buttonInstance = Button(self.uiAssets['button'], list(self.buttonInstanceData.iloc[b]), getattr(eventHandler, buttonId))
+            buttonInstance = self.tkInterManager.createButton(list(self.buttonInstanceData.iloc[b]), getattr(eventHandler, buttonId))
             self.buttonsList.append(buttonInstance)
         
         for l in range(self.labelInstanceData.shape[0]):
-            labelInstance = Label(self.uiAssets['label'], list(self.labelInstanceData.iloc[l]))
+            labelInstance = self.tkInterManager.createLabel(list(self.labelInstanceData.iloc[l]))
             self.labelsList.append(labelInstance)
         
         for t in range(self.textBoxInstanceData.shape[0]):
             textBoxId = self.textBoxInstanceData.iloc[t][0]
-            textBoxInstance = TextBox(self.uiAssets['textBox'], list(self.textBoxInstanceData.iloc[t]))
+            textBoxInstance = self.tkInterManager.createTextBox(list(self.textBoxInstanceData.iloc[t]))
             self.textBoxesList.append(textBoxInstance)
             self.textBoxDict[textBoxId] = textBoxInstance
 

@@ -24,7 +24,7 @@ class Screen():
         self.labelInstanceData = None
         self.textBoxInstanceData = None
         
-        self.scrollBar = "N"
+        self.isScrollBar = "N"
         self.numRows = 0
         self.numColumns = 0
         self.bgColor = None
@@ -48,13 +48,13 @@ class Screen():
         self.numRows = screenConfigValues[0]
         self.numColumns = screenConfigValues[1]
         self.bgColor = screenConfigValues[2]
-        self.scrollbar = screenConfigValues[3]
+        self.isScrollBar = screenConfigValues[3]
 
 #########################################################################################
 
     def loadScreen(self, eventHandler):
         
-        if self.scrollBar == "Y":
+        if self.isScrollBar == "Y":
             self.loadScrollBar()
         
         for b in range(self.buttonInstanceData.shape[0]):
@@ -77,11 +77,11 @@ class Screen():
     def loadScrollBar(self):
         
         self.canvas = self.tkInterManager.createCanvas(self.root) 
-
         self.scrollBar = self.tkInterManager.createScrollBar(self.root, self.canvas)
-        
-        self.frame = self.tkInterManager.createFrame(self.canvas)
         self.canvas.configScrollBar(self.scrollBar)
+
+        self.frame = self.tkInterManager.createFrame(self.canvas)
+        self.canvas.createWindow(self.frame)
 
         self.base = self.frame
 
@@ -109,10 +109,9 @@ class Screen():
     def build(self):
         self.root.setBgColor(self.bgColor)
         
-        if self.scrollBar == "Y":
+        if self.isScrollBar == "Y":
             self.canvas.pack()
             self.scrollBar.pack()
-            self.canvas.createWindow(self.frame)
         
         for button in self.buttonsList:
             button.place()

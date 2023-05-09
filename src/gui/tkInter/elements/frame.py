@@ -14,7 +14,7 @@ class Frame (Element):
 #########################################################################################
 
     def createElement(self):
-        self.element =  tk.Frame(self.base.element)
+        self.element =  tk.Frame(self.base.element, width = 1200, height = 800)
 
 #########################################################################################
     

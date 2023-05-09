@@ -12,6 +12,7 @@ class Screen():
         self.layoutAssets = layoutAsstes
         self.tkInterManager = tkInterManager
         self.root = root
+        self.base = self.root
 
         self.buttonsList = []
         self.labelsList = []
@@ -23,7 +24,7 @@ class Screen():
         self.labelInstanceData = None
         self.textBoxInstanceData = None
         
-        self.scrollbar = False
+        self.scrollBar = "N"
         self.numRows = 0
         self.numColumns = 0
         self.bgColor = None
@@ -52,21 +53,37 @@ class Screen():
 #########################################################################################
 
     def loadScreen(self, eventHandler):
-    
+        
+        if self.scrollBar == "Y":
+            self.loadScrollBar()
+        
         for b in range(self.buttonInstanceData.shape[0]):
             buttonId = self.buttonInstanceData.iloc[b][0]
-            buttonInstance = self.tkInterManager.createButton(list(self.buttonInstanceData.iloc[b]), getattr(eventHandler, buttonId))
+            buttonInstance = self.tkInterManager.createButton(self.base, list(self.buttonInstanceData.iloc[b]), getattr(eventHandler, buttonId))
             self.buttonsList.append(buttonInstance)
         
         for l in range(self.labelInstanceData.shape[0]):
-            labelInstance = self.tkInterManager.createLabel(list(self.labelInstanceData.iloc[l]))
+            labelInstance = self.tkInterManager.createLabel(self.base, list(self.labelInstanceData.iloc[l]))
             self.labelsList.append(labelInstance)
         
         for t in range(self.textBoxInstanceData.shape[0]):
             textBoxId = self.textBoxInstanceData.iloc[t][0]
-            textBoxInstance = self.tkInterManager.createTextBox(list(self.textBoxInstanceData.iloc[t]))
+            textBoxInstance = self.tkInterManager.createTextBox(self.base, list(self.textBoxInstanceData.iloc[t]))
             self.textBoxesList.append(textBoxInstance)
             self.textBoxDict[textBoxId] = textBoxInstance
+
+#########################################################################################
+
+    def loadScrollBar(self):
+        
+        self.canvas = self.tkInterManager.createCanvas(self.root) 
+
+        self.scrollBar = self.tkInterManager.createScrollBar(self.root, self.canvas)
+        
+        self.frame = self.tkInterManager.createFrame(self.canvas)
+        self.canvas.configScrollBar(self.scrollBar)
+
+        self.base = self.frame
 
 #########################################################################################
 
@@ -92,14 +109,19 @@ class Screen():
     def build(self):
         self.root.setBgColor(self.bgColor)
         
+        if self.scrollBar == "Y":
+            self.canvas.pack()
+            self.scrollBar.pack()
+            self.canvas.createWindow(self.frame)
+        
         for button in self.buttonsList:
-            button.place(button.pos[0], button.pos[1], button.sticky)
+            button.place()
 
         for label in self.labelsList:
-            label.place(label.pos[0], label.pos[1], label.sticky)
+            label.place()
         
         for textBox in self.textBoxesList:
-            textBox.place(textBox.pos[0], textBox.pos[1], textBox.sticky)
+            textBox.place()
 
 #########################################################################################
 
@@ -138,6 +160,6 @@ class Screen():
     def rePositionDynamicElements(self):
         for element in self.dynamicElements:
             self.gridMaker.positionElement(element)
-            element.place(element.pos[0], element.pos[1], element.sticky)
+            element.place()
 
 #########################################################################################

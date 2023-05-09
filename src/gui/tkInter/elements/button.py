@@ -33,7 +33,8 @@ class Button(Element):
                 self.sticky = "center"
     
     def createElement(self):
-        self.element = tk.Button(bd = self.uiAssets[1],
+        self.element = tk.Button(self.base.element,
+                                bd = self.uiAssets[1],
                                 bg = self.uiAssets[2], 
                                 fg = self.uiAssets[3], 
                                 activebackground = self.uiAssets[4], 

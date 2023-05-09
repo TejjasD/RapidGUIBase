@@ -33,7 +33,8 @@ class Label(Element):
     
 
     def createElement(self):
-        self.element = tk.Label(fg = self.uiAssets[1], 
+        self.element = tk.Label(self.base.element,
+                              fg = self.uiAssets[1], 
                               bg = self.uiAssets[2],
                               font = (self.uiAssets[3], self.uiAssets[4]), 
                               text = self.instanceData[8])

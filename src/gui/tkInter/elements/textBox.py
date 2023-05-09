@@ -32,7 +32,8 @@ class TextBox(Element):
     
     
     def createElement(self):
-        self.element = tk.Entry(bd = self.uiAssets[1],
+        self.element = tk.Entry(self.base.element,
+                                bd = self.uiAssets[1],
                                 bg = self.uiAssets[2], 
                                 fg = self.uiAssets[3],  
                                 font = (self.uiAssets[4], self.uiAssets[5]), 

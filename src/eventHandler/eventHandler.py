@@ -6,6 +6,7 @@ class eventHandler:
 
     def __init__(self, app):
         self.app = app
+        self.root = self.app.root
         self.tempLabels = []
         self.tempButtons = []
         self.tempTextBoxes = []
@@ -50,7 +51,7 @@ class eventHandler:
 #########################################################################################
 
     def btAddField2(self):
-
+        base = self.app.activeScreen.base
         if  not self.btAddField2Lock:
             labelData = self.app.activeScreen.labelInstanceData
             labelList = self.app.activeScreen.labelsList
@@ -63,18 +64,18 @@ class eventHandler:
 
             textBoxinstanceData = ["tbFieldName2", 0, 0, maxRow + 1, maxRow + 1, 9, 10, "w", 0]
             labelInstanceData = ["lbFieldName2", 0, 0, maxRow + 1, maxRow + 1, 7, 8, "e", "Enter Field Name :", 5]
-            fieldNameTextbox = self.app.tkInterManager.createTextBox(textBoxinstanceData)  
-            fieldNameLabel = self.app.tkInterManager.createLabel(labelInstanceData)
+            fieldNameTextbox = self.app.tkInterManager.createTextBox(base, textBoxinstanceData)  
+            fieldNameLabel = self.app.tkInterManager.createLabel(base, labelInstanceData)
 
             self.app.activeScreen.gridMaker.positionElement(fieldNameTextbox)
             self.app.activeScreen.gridMaker.positionElement(fieldNameLabel)
-            fieldNameTextbox.place(fieldNameTextbox.pos[0], fieldNameTextbox.pos[1], fieldNameTextbox.sticky)
-            fieldNameLabel.place(fieldNameLabel.pos[0], fieldNameLabel.pos[1], fieldNameLabel.sticky)
+            fieldNameTextbox.place()
+            fieldNameLabel.place()
 
             buttonInstancedata = ["btConfirmField2", 0, 0, maxRow + 1, maxRow + 1, 11, 12, "center", "Confirm Field", 3]
-            confirmFieldButton = self.app.tkInterManager.createButton(buttonInstancedata, getattr(self, "btConfirmField2"))
+            confirmFieldButton = self.app.tkInterManager.createButton(base, buttonInstancedata, getattr(self, "btConfirmField2"))
             self.app.activeScreen.gridMaker.positionElement(confirmFieldButton)
-            confirmFieldButton.place(confirmFieldButton.pos[0], confirmFieldButton.pos[1], confirmFieldButton.sticky)
+            confirmFieldButton.place()
 
             self.tempLabels.append(fieldNameLabel)
             self.tempButtons.append(confirmFieldButton)
@@ -85,6 +86,7 @@ class eventHandler:
 #########################################################################################
 
     def btConfirmField2(self):
+        base = self.app.activeScreen.base
         fieldName = self.tempTextBoxes[0].get() + " :"
 
         if fieldName != " :":     
@@ -93,13 +95,13 @@ class eventHandler:
 
             textBoxinstanceData = ["tbNewField2", 0, 0, rowStart, rowEnd, 9, 10, "w", 0]
             labelInstanceData = ["lbNewField2", 0, 0, rowStart, rowEnd, 7, 8, "e", fieldName, 3]
-            fieldNameTextbox = self.app.tkInterManager.createTextBox(textBoxinstanceData)  
-            fieldNameLabel = self.app.tkInterManager.createLabel(labelInstanceData)
+            fieldNameTextbox = self.app.tkInterManager.createTextBox(base, textBoxinstanceData)  
+            fieldNameLabel = self.app.tkInterManager.createLabel(base, labelInstanceData)
 
             self.app.activeScreen.gridMaker.positionElement(fieldNameTextbox)
             self.app.activeScreen.gridMaker.positionElement(fieldNameLabel)
-            fieldNameTextbox.place(fieldNameTextbox.pos[0], fieldNameTextbox.pos[1], fieldNameTextbox.sticky)
-            fieldNameLabel.place(fieldNameLabel.pos[0], fieldNameLabel.pos[1], fieldNameLabel.sticky)
+            fieldNameTextbox.place()
+            fieldNameLabel.place()
 
             self.app.activeScreen.labelsList.append(fieldNameLabel)
             self.app.activeScreen.textBoxesList.append(fieldNameTextbox)

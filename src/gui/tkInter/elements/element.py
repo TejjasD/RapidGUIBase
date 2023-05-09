@@ -4,22 +4,13 @@
 
 class Element:
 
-    def __init__(self, instancedata, uiAssets = None, command = None):
+    def __init__(self, instancedata = None, base = None, uiAssets = None, command = None):
+        self.base = base
         self.type = None
         self.uiAssets = uiAssets
         self.instanceData = instancedata
         self.command = command
-        self.id = 0
-        self.pos = (0, 0)
         self.element = None
-        self.width = None
-        self.height = None
-
-        self.rowStart = 0
-        self.rowSpan = 0
-        self.columnStart = 0
-        self.columnSpan = 0
-        self.sticky = "center"
 
         self.implInstanceData()
         self.createElement()
@@ -41,8 +32,8 @@ class Element:
 
 #########################################################################################
 
-    def place(self, x, y, sticky):
-        self.element.place(x = x, y = y, anchor = sticky)
+    def place(self):
+        self.element.place(x = self.pos[0], y = self.pos[1], anchor = self.sticky)
 
 #########################################################################################
 

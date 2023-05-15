@@ -47,3 +47,22 @@ class TextBox(Element):
         return self.element.get()
 
 #########################################################################################
+
+    def insertAtEnd(self, insert):
+        text = self.element.get()
+        self.element.insert(len(text), insert)
+
+#########################################################################################
+
+    def clear(self):
+        self.element.delete(0, tk.END)
+
+#########################################################################################
+
+    def backSpace(self):
+        text = self.element.get()
+        newText = text[0:-1]
+        self.clear()
+        self.insertAtEnd(newText)
+
+#########################################################################################

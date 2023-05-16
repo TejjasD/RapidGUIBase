@@ -9,7 +9,8 @@ import os
 #########################################################################################
 
 class AssetLoader:
-    def __init__(self):
+    def __init__(self, assetFile):
+        self.assetFile = assetFile
         self.assetsDictionary = {}
         self.readAssets()
 
@@ -24,7 +25,7 @@ class AssetLoader:
     
     def readRootAssets(self):
         rootAssetDictionary = {}
-        rootAssetDictionary['window'] =  pd.read_csv('assets\\ui\\root\\window\\window.csv')
+        rootAssetDictionary['window'] =  pd.read_csv('assets\\'+ self.assetFile + '\\root\\window\\window.csv')
         self.assetsDictionary['root'] = rootAssetDictionary
 
 #########################################################################################
@@ -40,11 +41,11 @@ class AssetLoader:
    
     def readLayoutAssets(self):
         screensAssetDictionary = {}
-        path = "assets\\layout"
+        path = "assets\\" + self.assetFile + "\\layout"
         numScreens =  len(os.listdir(path))
         for screen in range(numScreens):
             screenAssetDictionary = {}
-            fileName = 'assets\layout' + '\screen' + str(screen)+ 'Elements.xlsx'
+            fileName = 'assets\\' + self.assetFile + '\layout' + '\screen' + str(screen)+ 'Elements.xlsx'
             screenAssetDictionary['button'] = pd.read_excel(fileName, sheet_name = "Buttons")
             screenAssetDictionary['label'] = pd.read_excel(fileName, sheet_name="Labels")
             screenAssetDictionary['textBox'] = pd.read_excel(fileName, sheet_name="TextBoxes")

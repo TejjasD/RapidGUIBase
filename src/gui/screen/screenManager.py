@@ -11,8 +11,6 @@ class ScreenManager:
         self.eventHandler = eventHandler
         self.layoutAssets = layoutAssets
         self.root = root
-        self.rootWidth = root.width
-        self.rootHeight = root.height
         self.tkInterManager = tkInterManager
 
         self.loadScreens()
@@ -24,8 +22,9 @@ class ScreenManager:
     def loadScreens(self):
         numScreens = len(self.layoutAssets)
         for screenNumber in range(numScreens):
-            screenInstance = Screen(screenNumber, self.layoutAssets[screenNumber], self.rootWidth, self.rootHeight, self.tkInterManager)
+            screenInstance = Screen(screenNumber, self.layoutAssets[screenNumber], self.tkInterManager, self.root)
             screenInstance.loadScreen(self.eventHandler)
+            screenInstance.loadDynamicElements()
             self.screensList.append(screenInstance)
 
 #########################################################################################

@@ -2,16 +2,23 @@
 
 import sys
 sys.path.append('src/')
-from app.pfmApp import PfmApp
+from application.apps.pfmApp import PfmApp
+from application.apps.calculatorApp import CalculatorApp
 
 #########################################################################################
 
-def main():
+def mainPfm():
     app = PfmApp()   
     app.run()
 
 #########################################################################################
 
-main()
+def mainCalculator():
+    app = CalculatorApp()   
+    app.run()
+
+#########################################################################################
+
+mainPfm()
 
 #########################################################################################

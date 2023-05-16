@@ -13,10 +13,18 @@ class Label(Element):
         self.type = "label"
         self.id = self.instanceData[0]
         self.pos = (self.instanceData[1], self.instanceData[2])
-        self.rowStart = int(self.instanceData[3]) - 1
-        self.rowSpan = int(self.instanceData[4]) - self.rowStart
-        self.columnStart = int(self.instanceData[5]) - 1
-        self.columnSpan = int(self.instanceData[6])-self.columnStart
+
+        if not math.isnan(self.instanceData[3]):
+            self.rowStart = int(self.instanceData[3])
+            self.rowSpan = int(self.instanceData[4]) - self.rowStart + 1
+            self.columnStart = int(self.instanceData[5])
+            self.columnSpan = int(self.instanceData[6]) - self.columnStart + 1
+        else:
+            self.rowStart = None
+            self.rowSpan = None
+            self.columnStart = None
+            self.columnSpan = None
+        
         self.sticky = self.instanceData[7]
 
         if not isinstance(self.sticky, str):
@@ -25,7 +33,8 @@ class Label(Element):
     
 
     def createElement(self):
-        self.element = tk.Label(fg = self.uiAssets[1], 
+        self.element = tk.Label(self.base.element,
+                              fg = self.uiAssets[1], 
                               bg = self.uiAssets[2],
                               font = (self.uiAssets[3], self.uiAssets[4]), 
                               text = self.instanceData[8])

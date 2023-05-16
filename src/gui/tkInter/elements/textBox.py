@@ -13,10 +13,17 @@ class TextBox(Element):
         self.id = self.instanceData[0]
         self.pos = (self.instanceData[1], self.instanceData[2])
 
-        self.rowStart = int(self.instanceData[3]) - 1
-        self.rowSpan = int(self.instanceData[4]) - self.rowStart
-        self.columnStart = int(self.instanceData[5]) - 1
-        self.columnSpan = int(self.instanceData[6]) - self.columnStart
+        if not math.isnan(self.instanceData[3]):
+            self.rowStart = int(self.instanceData[3])
+            self.rowSpan = int(self.instanceData[4]) - self.rowStart + 1
+            self.columnStart = int(self.instanceData[5])
+            self.columnSpan = int(self.instanceData[6]) - self.columnStart + 1
+        else:
+            self.rowStart = None
+            self.rowSpan = None
+            self.columnStart = None
+            self.columnSpan = None
+        
         self.sticky = self.instanceData[7]
 
         if not isinstance(self.sticky, str):
@@ -25,13 +32,37 @@ class TextBox(Element):
     
     
     def createElement(self):
-        self.element = tk.Entry(bd = self.uiAssets[1],
+        self.element = tk.Entry(self.base.element,
+                                bd = self.uiAssets[1],
                                 bg = self.uiAssets[2], 
                                 fg = self.uiAssets[3],  
                                 font = (self.uiAssets[4], self.uiAssets[5]), 
                                 highlightcolor = self.uiAssets[6],  
                                 relief = self.uiAssets[7],
                                 width = self.uiAssets[8])
-        # self.element.config(height)
+
+#########################################################################################
+
+    def get(self):
+        return self.element.get()
+
+#########################################################################################
+
+    def insertAtEnd(self, insert):
+        text = self.element.get()
+        self.element.insert(len(text), insert)
+
+#########################################################################################
+
+    def clear(self):
+        self.element.delete(0, tk.END)
+
+#########################################################################################
+
+    def backSpace(self):
+        text = self.element.get()
+        newText = text[0:-1]
+        self.clear()
+        self.insertAtEnd(newText)
 
 #########################################################################################

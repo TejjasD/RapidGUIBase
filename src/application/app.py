@@ -3,7 +3,7 @@
 from core.assetLoader.assetLoader import AssetLoader
 from gui.screen.screenManager import ScreenManager
 from gui.tkInter.manager.tkIntermanager import TkInterManager
-from eventHandler.eventHandlerCalculator import EventHandlerCalculator
+from eventHandler.apps.eventHandlerCalculator import EventHandlerCalculator
 from user.passwordManager.passwordManager import passwordManager 
 
 #########################################################################################

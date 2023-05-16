@@ -1,7 +1,7 @@
 # Built by Tejas Deolasee
 
 from application.app import App
-from eventHandler.eventHandlerPfm import EventHandlerPfm
+from eventHandler.apps.eventHandlerPfm import EventHandlerPfm
 
 #########################################################################################
 

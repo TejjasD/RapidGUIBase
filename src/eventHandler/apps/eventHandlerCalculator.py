@@ -1,6 +1,6 @@
 # Built by Tejas Deolasee
 
-from eventHandler.eventHandler import EventHandler
+from eventHandler.eventHandler.eventHandler import EventHandler
 from mathematics.algebra.bodmasOperator import BodMasOperator
 
 #########################################################################################

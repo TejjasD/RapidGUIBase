@@ -1,7 +1,7 @@
 # Built by Tejas Deolasee
 
 from application.app import App
-from eventHandler.eventHandlerCalculator import EventHandlerCalculator
+from eventHandler.apps.eventHandlerCalculator import EventHandlerCalculator
 
 #########################################################################################
 

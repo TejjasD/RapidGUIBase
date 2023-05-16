@@ -4,7 +4,8 @@
 
 class Circle:
 
-    def __init__(self, radius, center)
-    {
-        
-    }
+    def __init__(self, radius, center):
+        self.radius = radius
+        self.center = center
+
+#########################################################################################

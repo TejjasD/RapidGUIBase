@@ -6,25 +6,24 @@ from gui.tkInter.manager.tkIntermanager import TkInterManager
 from eventHandler.eventHandlerCalculator import EventHandlerCalculator
 from user.passwordManager.passwordManager import passwordManager 
 
-import tkinter as tk
-
 #########################################################################################
 
-class CalculatorApp():
+class App():
     
-    def __init__(self):
-        self.assetPath = ""
-        self.assetLoader = AssetLoader("calculator")
+    def __init__(self, name):
+        self.assetLoader = AssetLoader(name)
         self.tkInterManager = TkInterManager(self.assetLoader.assetsDictionary['tkInterUI'])
         self.root = self.tkInterManager.createRoot(self.assetLoader.assetsDictionary['root']['window']["Value"])
 
-        self.eventHandler = EventHandlerCalculator(self)
-        self.screenManager = ScreenManager(self.eventHandler, self.assetLoader.assetsDictionary['layout'] , self.tkInterManager, self.root)
+#########################################################################################
+    
+    def initContinued(self, eventHandler):
+        self.screenManager = ScreenManager(eventHandler, self.assetLoader.assetsDictionary['layout'] , self.tkInterManager, self.root)
+        self.passwordManager = passwordManager()
         self.screenNumber = 0
         self.activeScreen = self.screenManager.screensList[self.screenNumber]
-        self.passwordManager = passwordManager()
-
         self.build()
+
           
 #########################################################################################
 
@@ -32,15 +31,15 @@ class CalculatorApp():
         self.root.run()
 
 #########################################################################################
-    
-    def build(self):
-        self.screenManager.buildScreen(self.screenNumber)
 
-#########################################################################################
+    def build(self):
+            self.screenManager.buildScreen(self.screenNumber)
+
+    #########################################################################################
 
     def changeScreen(self, newScreenNumber):
         self.screenNumber = newScreenNumber
         self.activeScreen = self.screenManager.screensList[self.screenNumber]
         self.build()
 
-#########################################################################################
+    #########################################################################################

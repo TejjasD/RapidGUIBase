@@ -2,8 +2,8 @@
 
 import sys
 sys.path.append('src/')
-from app.pfmApp import PfmApp
-from app.calculatorApp import CalculatorApp
+from application.apps.pfmApp import PfmApp
+from application.apps.calculatorApp import CalculatorApp
 
 #########################################################################################
 

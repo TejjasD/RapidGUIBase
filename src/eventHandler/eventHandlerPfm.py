@@ -5,6 +5,13 @@ from eventHandler.eventHandler import EventHandler
 #########################################################################################
 
 class EventHandlerPfm (EventHandler):
+
+
+    def __init__(self, app):
+        super().__init__(app)
+        self.btAddField2Lock = False
+
+#########################################################################################
         
     def btLogin0(self):
         screen = self.app.screenManager.screensList[self.app.screenNumber]

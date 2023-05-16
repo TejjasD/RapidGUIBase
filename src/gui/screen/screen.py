@@ -81,6 +81,7 @@ class Screen():
         self.canvas.configScrollBar(self.scrollBar)
 
         self.frame = self.tkInterManager.createFrame(self.canvas)
+        self.frame.changeColor(self.bgColor)
         self.canvas.createWindow(self.frame)
 
         self.base = self.frame
@@ -131,6 +132,10 @@ class Screen():
             label.destroy()
         for textBox in self.textBoxesList:
             textBox.destroy()
+
+        if self.isScrollBar == "Y":
+            self.canvas.destroy()
+            self.scrollBar.destroy()
 
 #########################################################################################
 

@@ -6,6 +6,11 @@ from mathematics.algebra.bodmasOperator import BodMasOperator
 #########################################################################################
 
 class EventHandlerCalculator (EventHandler):
+
+    def __init__(self, app):
+        super().__init__(app)
+
+#########################################################################################
         
     def btCalculator0(self):
         screen = self.app.activeScreen

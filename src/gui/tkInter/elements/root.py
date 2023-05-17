@@ -30,3 +30,8 @@ class Root (Element):
         self.element.mainloop()
 
 #########################################################################################
+
+    def bindConfigure(self, function):
+        self.element.bind("<Configure>", function)
+
+#########################################################################################

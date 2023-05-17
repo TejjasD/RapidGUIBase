@@ -1,3 +1,7 @@
+# Built by Tejas Deolasee
+
+import sys
+sys.dont_write_bytecode = True
 import tkinter as tk
 
 #########################################################################################

@@ -3,7 +3,6 @@
 from core.assetLoader.assetLoader import AssetLoader
 from gui.screen.screenManager import ScreenManager
 from gui.tkInter.manager.tkIntermanager import TkInterManager
-from eventHandler.apps.eventHandlerCalculator import EventHandlerCalculator
 from user.passwordManager.passwordManager import passwordManager 
 
 #########################################################################################
@@ -18,6 +17,7 @@ class App():
 #########################################################################################
     
     def initContinued(self, eventHandler):
+        self.root.bindConfigure(self.eventHandler.resizeEventHandler.resizeEventTrigger)
         self.screenManager = ScreenManager(eventHandler, self.assetLoader.assetsDictionary['layout'] , self.tkInterManager, self.root)
         self.passwordManager = passwordManager()
         self.screenNumber = 0

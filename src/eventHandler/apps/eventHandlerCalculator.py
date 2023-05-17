@@ -13,8 +13,7 @@ class EventHandlerCalculator (EventHandler):
 #########################################################################################
         
     def btCalculator0(self):
-        screen = self.app.activeScreen
-        screen.destroy()
+        self.app.activeScreen.destroy()
         self.app.changeScreen(1)
 
 #########################################################################################

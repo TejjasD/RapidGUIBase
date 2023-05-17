@@ -167,3 +167,18 @@ class Screen():
             element.place()
 
 #########################################################################################
+
+    def resizeAllElements(self, width, height):
+        self.gridMaker.updateGrid(width, height)
+        self.frame.configure(width, height)
+        for button in self.buttonsList:
+            self.gridMaker.positionElement(button)
+            button.place()
+        for label in self.labelsList:
+            self.gridMaker.positionElement(label)
+            label.place()
+        for textBox in self.textBoxesList:
+            self.gridMaker.positionElement(textBox)
+            textBox.place()
+
+#########################################################################################

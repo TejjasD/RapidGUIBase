@@ -2,10 +2,9 @@
 
 #########################################################################################
 
-class GridMaker:
+class GridMakerFree:
 
-    def __init__(self, screen, rootWidth, rootHeight, numRows , numCols):
-        self.screen = screen
+    def __init__(self, rootWidth, rootHeight, numRows , numCols):
         self.width = rootWidth
         self.height = rootHeight
         self.numCols = numCols
@@ -69,9 +68,9 @@ class GridMaker:
 
     def cellPosition(self, column, row):
         if column < 0:
-            column = self.screen.activeColumn + column - 1
+            column = self.numCols + column - 1
         if row < 0:
-            row = self.screen.activeRow + row - 1
+            row = self.numRows + row - 1
         x = self.xBuffer + (column * self.columnWidth)
         y = self.yBuffer + (row * self.rowHeight)
         return (x, y)
@@ -84,7 +83,6 @@ class GridMaker:
         self.calculateCellDimensions()
 
 #########################################################################################
-
 
 
 

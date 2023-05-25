@@ -8,6 +8,7 @@ class ResizeEventHandler:
         self.eventHandler = eventHandler
         self.newHight = 0
         self.newWidth = 0
+        self.reziseInvokeCount = 0
 
 #########################################################################################
 
@@ -20,6 +21,9 @@ class ResizeEventHandler:
 #########################################################################################
 
     def resizeAllElements(self):
-        self.eventHandler.app.activeScreen.resizeAllElements(self.newWidth, self.newHight)
+        if (self.reziseInvokeCount != 0):
+            self.eventHandler.app.activeScreen.resizeAllElements(self.newWidth, self.newHight)
+        else:
+            self.reziseInvokeCount += 1
 
 #########################################################################################

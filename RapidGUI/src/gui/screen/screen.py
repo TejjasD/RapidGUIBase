@@ -35,6 +35,9 @@ class Screen():
         self.activeColumn = self.numColumns
 
         self.gridMaker = GridMaker(self, self.root.width, self.root.height, self.numRows, self.numColumns)
+
+        self.canvasWidth = self.root.width + 200
+        self.canvasHeight = self.root.height +200
     
 #########################################################################################
 
@@ -108,6 +111,7 @@ class Screen():
 #########################################################################################      
   
     def build(self):
+        self.resizeAllElements(self.root.width, self.root.height)
         self.root.setBgColor(self.bgColor)
         
         if self.isScrollBar == "Y":
@@ -150,12 +154,18 @@ class Screen():
 #########################################################################################
 
     def addRow(self):
+        self.canvasHeight += self.gridMaker.rowHeight
+        self.canvas.configure(self.canvasWidth, self.canvasHeight)
+        self.resizeAllElements(self.root.width, self.root.height)
         self.activeRow += 1
         self.rePositionDynamicElements()
 
 #########################################################################################
 
     def addColumn(self):
+        self.canvasWidth += self.gridMaker.columnWidth
+        self.canvas.configure(self.canvasWidth, self.canvasHeight)
+        self.resizeAllElements(self.root.width, self.root.height)
         self.activeColumn += 1
         self.rePositionDynamicElements()
     
@@ -169,8 +179,11 @@ class Screen():
 #########################################################################################
 
     def resizeAllElements(self, width, height):
+        self.root.width = width
+        self.root.height = height
         self.gridMaker.updateGrid(width, height)
-        self.frame.configure(width, height)
+        if self.isScrollBar == "Y":
+            self.frame.configure(width, height)
         for button in self.buttonsList:
             self.gridMaker.positionElement(button)
             button.place()

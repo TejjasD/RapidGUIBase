@@ -1,0 +1,27 @@
+{
+    "nodes": [
+        {
+            "name" : "1",
+            "x" : 50,
+            "y" : 50,
+            "z" : 0, 
+            "type" : "none"
+        },
+        {
+            "name" : "2",
+            "x" : 100,
+            "y" : 100,
+            "z" : 0, 
+            "type" : "none"  
+        }
+    ],
+    "edges" : [
+        {
+            "from" : "1",
+            "to" : "2",
+            "weight" : 0,
+            "isBidirectional" : true
+        }
+    ]
+}
+  

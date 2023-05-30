@@ -1,9 +1,5 @@
-import sys
-sys.dont_write_bytecode = True
-sys.path.append('FleetCore/')
-
-from FleetCore.src.graph.node import Node
-from FleetCore.src.graph.edge import Edge
+from graph.shortestPathPlanner import ShortestPathPlanner
+from graph.graphUtils import GraphUtils
 
 class Graph:
 
@@ -13,6 +9,8 @@ class Graph:
         self.nodeCount = 0
         self.nodeDict = {}
         self.edgeDict = {}
+        self.pathPlanner = ShortestPathPlanner(self)
+        self.graphUtils = GraphUtils(self)
     
     def addNode(self, node):
         self.nodes.append(node)
@@ -22,5 +20,16 @@ class Graph:
     def addEdge(self, edge):
         self.edges.append(edge)
         self.edgeDict[(edge.fromNode, edge.toNode)] = edge
+        edge.fromNode.reachableNodes.append(edge.toNode)
+    
+    def findPath(self, pos, goal):
+        start = self.graphUtils.getNearestNode(pos)
+        return self.pathPlanner.getPath(start, goal)
+        # if goal.name == "3" and pos[1] == 50:
+        #     return [self.nodes[0], self.nodes[1], self.nodes[2]]
+        # if goal.name == "2":
+        #     return [self.nodes[2], self.nodes[1]]
+        # if goal.name == "3":
+        #     return [self.nodes[1], self.nodes[2]]
 
     

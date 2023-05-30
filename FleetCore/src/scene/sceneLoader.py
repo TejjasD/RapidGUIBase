@@ -1,18 +1,16 @@
 import json
 
-import sys
-sys.dont_write_bytecode = True
-sys.path.append('FleetCore/')
-
-from FleetCore.src.graph.graph import Graph
-from FleetCore.src.graph.node import Node
-from FleetCore.src.graph.edge import Edge
+from graph.graph import Graph
+from graph.node import Node
+from graph.edge import Edge
+from plot.plotMapper import PlotMapper
 
 
 
 class SceneLoader():
 
-    def __init__(self, path):
+    def __init__(self, plotMapper, path):
+        self.plotMapper = plotMapper
         self.graph = Graph()
         self.readScene(path)
 
@@ -25,11 +23,13 @@ class SceneLoader():
         edges = data["edges"]
 
         for node in nodes:
-            node = Node(node["x"], node["y"], node["z"], node["type"])
+            node = Node(node["name"], node["pose"]["position"]["x"], node["pose"]["position"]["y"], node["pose"]["position"]["z"], node["type"])
             self.graph.addNode(node)
         
+        self.plotMapper.mapPlot(self.graph)
+
         for edge in edges:
-            edge = Edge(edge["from"], edge["to", edge["weight"], edge["isBidirectional"]])
+            edge = Edge(self.graph.nodeDict[edge["from"]], self.graph.nodeDict[edge["to"]], edge["isUniDirectional"])
             self.graph.addEdge(edge)
 
 

@@ -7,7 +7,7 @@ class Simulator:
         self.scene = scene
         self.path = "FleetCore/asset/scenario/sample.json"
         self.simulationLoader = SimulationLoader(self.path)
-        self.simulationLoader.exportScenario(100, self.scene.graph)
+        self.simulationLoader.exportScenario(10, self.scene.graph)
         self.simulationLoader.readScenario()
         self.robotManager = self.simulationLoader.robotManager
     

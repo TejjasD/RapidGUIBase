@@ -13,15 +13,15 @@ class Controller:
         for agent in self.agentManager.agents:
             if agent.goal is not None and agent.path == []:
                 agent.path = self.graph.findPath(agent.pos, agent.goal)
-                agent.localGoal = agent.path[0]
+                agent.localGoal = agent.path[1]
+                agent.computeVector()
         self.reserveNodes()
     
 
     def reserveNodes(self):
         paths = []
         for agent in self.agentManager.agents:
-            if len(agent.path) != 0:
-                paths.append(agent.path)
+            paths.append(agent.path)
         reservedTill = self.coupledPathPlanner.getReservedNodes(paths)
 
         for i in range(0, len(self.agentManager.agents)):

@@ -31,6 +31,15 @@ class GraphUtils:
             if node.y > maxY:
                 maxY = node.y
         return [minX, maxX, minY, maxY]
+    
+    @staticmethod
+    def getDistanceBetweenNodes(start, end):
+        return ((start.x - end.x)**2 + (start.y - end.y)**2)**0.5
+
+    @staticmethod
+    def getDistanceFromPos(goal, pos):
+        return ((goal.x - pos[0])**2 + (goal.y - pos[1])**2)**0.5
+    
             
 
 

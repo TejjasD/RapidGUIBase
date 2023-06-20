@@ -5,4 +5,4 @@ class CoupledPathPlanner:
         self.graph = graph
     
     def getReservedNodes(self, paths):
-        return [100 for i in range(100)]
+        return [100 for i in range(10)]

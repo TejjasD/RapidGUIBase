@@ -1,4 +1,5 @@
 from scenario.agent.agentBehaviour import AgentBehaviour
+from graph.graphUtils import GraphUtils
 
 class Agent:
 
@@ -21,6 +22,8 @@ class Agent:
         self.speed = 0.01
         self.task = None
         self.picked = False
+        self.goalReachTolerance = 0.01
+        self.vector = [0, 0]
 
         self.calculateBoundingBox()
         
@@ -32,23 +35,44 @@ class Agent:
         self.bounds = [corner1, corner2, corner3, corner4]
     
     def step(self):
+        self.clearCurrentNode()
         self.agentBehaviour.step()
         self.followPath()
         self.calculateBoundingBox()
     
-    def followPath(self):     
-        if self.localGoal is not None and len(self.path) != 0:
-            currentIndex = self.path.index(self.localGoal)
-            if currentIndex <= len(self.path) - 1 and currentIndex < self.reservedNodesTill:
-                nextGoal = self.path[currentIndex + 1]
-                vector = (nextGoal.x - self.localGoal.x, nextGoal.y - self.localGoal.y)
-                self.pos[0] += self.speed * vector[0]
-                self.pos[1] += self.speed * vector[1]
 
-                if abs(self.pos[0] - nextGoal.x) < self.speed and abs(self.pos[1] - nextGoal.y) < self.speed:
-                    self.localGoal = nextGoal
-                    self.pos[0] = nextGoal.x
-                    self.pos[1] = nextGoal.y
+    def followPath(self):   
+        self.computeVector()  
+        self.pos[0] += self.speed * self.vector[0]
+        self.pos[1] += self.speed * self.vector[1] 
+
+    def clearCurrentNode(self):
+        if len(self.path) != 0:
+            if (self.localGoal == self.path[0]):
+                if len(self.path) == 1:
+                    if abs(self.pos[0] - self.localGoal.x) < self.goalReachTolerance and abs(self.pos[1] - self.localGoal.y) < self.goalReachTolerance:
+                        self.path.pop(0)
+                        self.goal = None
+                else:
+                    nextGoal = self.path[1]
+                    distance = GraphUtils.getDistanceBetweenNodes(self.localGoal, nextGoal)
+                    coveredDistance = GraphUtils.getDistanceFromPos(self.localGoal, self.pos)
+                    if coveredDistance >= 0.5 * distance:
+                        self.path.pop(0)
+                        self.reservedNodesTill -= 1
+                        self.findNextGoal() 
+    
+
+    def findNextGoal(self):
+        if len(self.path) > 0:
+            if self.reservedNodesTill > 0:
+                self.localGoal = self.path[0]
+                self.computeVector()
+    
+
+    def computeVector(self):
+        if self.localGoal is not None:
+            self.vector = (self.localGoal.x - self.pos[0], self.localGoal.y - self.pos[1])
             
 
 

@@ -25,11 +25,5 @@ class Graph:
     def findPath(self, pos, goal):
         start = self.graphUtils.getNearestNode(pos)
         return self.pathPlanner.getPath(start, goal)
-        # if goal.name == "3" and pos[1] == 50:
-        #     return [self.nodes[0], self.nodes[1], self.nodes[2]]
-        # if goal.name == "2":
-        #     return [self.nodes[2], self.nodes[1]]
-        # if goal.name == "3":
-        #     return [self.nodes[1], self.nodes[2]]
 
     
